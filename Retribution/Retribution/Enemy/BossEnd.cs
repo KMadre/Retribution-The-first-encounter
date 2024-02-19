@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EGGS.PlayerRelated
+namespace Retribution.Enemy
 {
-    internal class AttackHandler
+    internal class BossEnd
     {
+
     }
 }

@@ -6,24 +6,17 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-
-/// <summary>
-/// Programmer: Kieran Madre
-/// Date: 1/31/2024
-/// Purpose: Allows for easy and automatic reading of a script which holds editable values of the player
-/// </summary>
-
-namespace EGGS.ScriptReader
+namespace Retribution.ScriptReader
 {
-    internal class PlayerScriptInterpreter : ScriptInterpreter
+    internal class PlayerInputInterpreter : ScriptInterpreter
     {
-        public PlayerScriptInterpreter(string json) : base(json)
+        public PlayerInputInterpreter(string json) : base(json)
         {
         }
 
         /// <summary>
         /// Programmer: Kieran Madre
-        /// Date: 1/31/2024
+        /// Date: 2/1/2024
         /// Purpose: Read a json and concat the values together, return all values in the json
         /// </summary>
         /// <returns></returns>
@@ -32,8 +25,8 @@ namespace EGGS.ScriptReader
             StringWriter sw = new StringWriter();
             try
             {
-                sw.Write(curr.GetProperty("Lives").GetString() + ",");
-                sw.Write(curr.GetProperty("Speed").GetString());
+                sw.Write(curr.GetProperty("SlowdownMultiplier").GetString() + ",");
+                sw.Write(curr.GetProperty("SprintMultiplier").GetString());
             }
             catch
             {

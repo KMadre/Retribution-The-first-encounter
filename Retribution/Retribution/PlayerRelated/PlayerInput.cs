@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EGGS.ScriptReader;
+using Retribution.ScriptReader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using EGGS.Projectiles;
+using Retribution.Projectiles;
 
 /// <summary>
 /// Programmer: Kieran Madre
 /// Date: 2/1/2024
 /// Purpose: create a class that encompasses all of the players movement options
 /// </summary>
-namespace EGGS.PlayerRelated
+namespace Retribution.PlayerRelated
 {
     /// <summary>
     /// References used!!!!

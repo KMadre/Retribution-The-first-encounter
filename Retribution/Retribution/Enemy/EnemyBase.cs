@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace EGGS.Enemy
+/*
+namespace Retribution.Enemy
 {
     internal class EnemyBase
     {
@@ -20,4 +20,4 @@ namespace EGGS.Enemy
         private EnemyMovement movement;
 
     }
-}
+}*/

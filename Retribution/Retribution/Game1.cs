@@ -1,18 +1,17 @@
-﻿using EGGS.ScriptReader;
-using EGGS.PlayerRelated;
+﻿using Retribution.ScriptReader;
+using Retribution.PlayerRelated;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using EGGS.Projectiles;
+using Retribution.Projectiles;
 
 /// <summary>
-/// Programmers: Kieran Madre, [name2], [name3], [name4], [name5]
+/// Programmers: Kieran Madre
 /// Summary: Create a Bullethell game with good software architecture and design
 /// Date Created: 1/30/2024
-/// Course: Cpts-487
 /// </summary>
 
-namespace EGGS
+namespace Retribution
 {
     public class Game1 : Game
     {

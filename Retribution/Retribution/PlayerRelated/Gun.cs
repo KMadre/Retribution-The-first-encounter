@@ -1,5 +1,5 @@
-﻿using EGGS.Projectiles;
-using EGGS.ScriptReader;
+﻿using Retribution.Projectiles;
+using Retribution.ScriptReader;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EGGS.PlayerRelated
+namespace Retribution.PlayerRelated
 {
     /// <summary>
     /// Programmer: Kieran Madre

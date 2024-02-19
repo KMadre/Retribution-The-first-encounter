@@ -1,5 +1,5 @@
-﻿using EGGS.Projectiles;
-using EGGS.ScriptReader;
+﻿using Retribution.Projectiles;
+using Retribution.ScriptReader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 /// Purpose: this class will handle all of the player related features such as movement, Lives, gun stats and attacks
 /// </summary>
 
-namespace EGGS.PlayerRelated
+namespace Retribution.PlayerRelated
 {
     public class Player
     {

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 /// Purpose: Abstract class which all other interpreters will inherit from
 /// </summary>
 
-namespace EGGS.ScriptReader
+namespace Retribution.ScriptReader
 {
     public abstract class ScriptInterpreter
     {
@@ -26,7 +26,7 @@ namespace EGGS.ScriptReader
         /// <param name="json">the script file name that is targeted by the user</param>
         public ScriptInterpreter(string json)
         {
-            //The worst code I have ever written, the getcurrent directory returns the debug folder with the .exe, but I step out into the EGGS folder to grab the scripts
+            //The worst code I have ever written, the getcurrent directory returns the debug folder with the .exe, but I step out into the Retribution folder to grab the scripts
             string inBin = Directory.GetCurrentDirectory();
             string overBin = Directory.GetParent(inBin).FullName;
             string overOverBin = Directory.GetParent(overBin).FullName;

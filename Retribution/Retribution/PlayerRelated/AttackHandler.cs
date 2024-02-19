@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EGGS.Enemy
+namespace Retribution.PlayerRelated
 {
-    internal class Grunt
+    internal class AttackHandler
     {
     }
 }

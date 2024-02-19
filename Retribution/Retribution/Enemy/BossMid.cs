@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EGGS.Enemy
+namespace Retribution.Enemy
 {
-    internal class GruntA
+    internal class BossMid
     {
     }
 }
