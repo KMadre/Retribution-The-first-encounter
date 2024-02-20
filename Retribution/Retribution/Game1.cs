@@ -72,7 +72,7 @@ namespace Retribution
         /// <param name="gameTime">This parameter handles the time that happened in game, and makes Frames seperate from game speed</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);//Clear the screen
+            GraphicsDevice.Clear(Color.White);//Clear the screen
             _spriteBatch.Begin();// begin sprite drawing
 
             // Draw Player
