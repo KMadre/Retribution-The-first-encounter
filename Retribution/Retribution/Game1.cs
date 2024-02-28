@@ -54,8 +54,7 @@ namespace Retribution
 
             player.LoadTexture(Content); // load player texture
             projectileFactory.LoadTexture(Content);
-            enemyHandler.gruntBFactory.LoadTexture(Content);
-            enemyHandler.gruntAFactory.LoadTexture(Content);
+            enemyHandler.LoadTextures(Content);
         }
 
         /// <summary>
@@ -100,11 +99,11 @@ namespace Retribution
             {
                 if(enemy is GruntA)
                 {
-                    _spriteBatch.Draw(enemyHandler.gruntAFactory.Texture, enemy.Position, Color.White);
+                    _spriteBatch.Draw(enemyHandler.gruntATexture, enemy.Position, Color.White);
                 }
                 if(enemy is GruntB)
                 {
-                    _spriteBatch.Draw(enemyHandler.gruntBFactory.Texture, enemy.Position, Color.White);
+                    _spriteBatch.Draw(enemyHandler.gruntBTexture, enemy.Position, Color.White);
                 }
             }
 

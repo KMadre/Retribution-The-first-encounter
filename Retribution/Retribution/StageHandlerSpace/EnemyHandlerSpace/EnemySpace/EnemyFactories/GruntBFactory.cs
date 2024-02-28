@@ -13,8 +13,6 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
 {
     public class GruntBFactory
     {
-
-        public Texture2D Texture;
         private int entityLimit;
         public GruntBFactory(int entityLimit_)
         {
@@ -26,11 +24,5 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
             GruntB gruntB = new GruntB();
             return gruntB;
         }
-
-        public void LoadTexture(ContentManager content)
-        {
-            this.Texture = content.Load<Texture2D>("Textures//GruntB");
-        }
-
     }
 }

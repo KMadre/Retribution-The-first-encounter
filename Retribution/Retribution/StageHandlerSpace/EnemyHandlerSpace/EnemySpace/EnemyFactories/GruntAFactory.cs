@@ -14,15 +14,9 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
     public class GruntAFactory
     {
         private int entityLimit;
-        public Texture2D Texture;
         public GruntAFactory(int entityLimit_)
         {
             this.entityLimit = entityLimit_;
-        }
-
-        public void LoadTexture(ContentManager content)
-        {
-            this.Texture = content.Load<Texture2D>("Textures//GruntA");
         }
 
         public GruntA createGrunt()
