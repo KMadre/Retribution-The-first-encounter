@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Retribution.Enemy
+namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMovementSpace
 {
-    internal class EnemyMovement
+    internal class EnemyMovementHandler
     {
-
-
-
     }
 }

@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Retribution.Projectiles;
+using Retribution.StageHandler.EnemyHandlerSpace;
+using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories;
+using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
 
 /// <summary>
 /// Programmers: Kieran Madre
@@ -18,8 +21,9 @@ namespace Retribution
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private Player player;
-        private ProjectileFactory projectileFactory;
+        public Player player;
+        public ProjectileFactory projectileFactory;
+        public EnemyHandler enemyHandler;
 
         public Game1()
         {
@@ -36,6 +40,7 @@ namespace Retribution
         {
             this.player = new Player();
             this.projectileFactory = new ProjectileFactory();
+            this.enemyHandler = new EnemyHandler();
 
             base.Initialize();
         }
@@ -49,6 +54,8 @@ namespace Retribution
 
             player.LoadTexture(Content); // load player texture
             projectileFactory.LoadTexture(Content);
+            enemyHandler.gruntBFactory.LoadTexture(Content);
+            enemyHandler.gruntAFactory.LoadTexture(Content);
         }
 
         /// <summary>
@@ -62,6 +69,13 @@ namespace Retribution
 
             player.InputScript(player, gameTime, projectileFactory); // player 
             projectileFactory.HandleProjectiles(gameTime);
+            enemyHandler.HandlePathing(gameTime);
+
+            var userButton = Keyboard.GetState(); // grab what button is currently being pressed down
+            if (userButton.IsKeyDown(Keys.R))
+            {
+                enemyHandler.enemies.Add(enemyHandler.gruntAFactory.createGrunt());
+            }
 
             base.Update(gameTime);
         }
@@ -81,6 +95,17 @@ namespace Retribution
             foreach(Projectile projectile in projectileFactory.ProjectileList)
             {
                 _spriteBatch.Draw(projectileFactory.Texture, projectile.Position, Color.White);
+            }
+            foreach (BaseEnemy enemy in enemyHandler.enemies)
+            {
+                if(enemy is GruntA)
+                {
+                    _spriteBatch.Draw(enemyHandler.gruntAFactory.Texture, enemy.Position, Color.White);
+                }
+                if(enemy is GruntB)
+                {
+                    _spriteBatch.Draw(enemyHandler.gruntBFactory.Texture, enemy.Position, Color.White);
+                }
             }
 
             _spriteBatch.End();// stop sprite drawing

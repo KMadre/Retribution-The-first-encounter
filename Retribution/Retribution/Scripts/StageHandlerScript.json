@@ -1,0 +1,49 @@
+﻿[
+  {
+    "Phases": "4",
+    "Timers": {
+      "Wave1": {
+        "id": "1",
+        "duration": "45"
+      },
+      "Wave2": {
+        "id": "2",
+        "duration": "60"
+      },
+      "Wave3": {
+        "id": "3",
+        "duration": "60"
+      },
+      "Wave4": {
+        "id": "4",
+        "duration": "60"
+      }
+    },
+    "StageDesigns": {
+      "Wave1": {
+        "id": "1",
+        "BackColor": "LightBlue",
+        "ForeColor": "White",
+        "Speed": "Slow"
+      },
+      "Wave2": {
+        "id": "2",
+        "BackColor": "Gray",
+        "ForeColor": "White",
+        "Speed": "Normal"
+      },
+      "Wave3": {
+        "id": "3",
+        "BackColor": "LightGreen",
+        "ForeColor": "LightGray",
+        "Speed": "Normal"
+      },
+      "Wave4": {
+        "id": "4",
+        "BackColor": "DarkGreen",
+        "ForeColor": "Black",
+        "Speed": "Fast"
+      }
+    }
+   }
+]
