@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Retribution.ScriptReader
@@ -25,8 +26,16 @@ namespace Retribution.ScriptReader
             StringWriter sw = new StringWriter();
             try
             {
-                sw.Write(curr.GetProperty("Phases_amount").GetString() + ",");
-                sw.Write(curr.GetProperty("Speed").GetString());
+                foreach(JsonProperty waveObj in curr.EnumerateObject())
+                {
+                    JsonElement wave = waveObj.Value;
+                    sw.Write(wave.GetProperty("duration").GetString() + ",");
+                    sw.Write(wave.GetProperty("EnemyAmountTotal").GetString() + ",");
+                    sw.Write(wave.GetProperty("isBoss").GetBoolean() + ",");
+                    sw.Write(wave.GetProperty("BackColor").GetString() + ",");
+                    sw.Write(wave.GetProperty("ForeColor").GetString() + ",");
+                    sw.Write(wave.GetProperty("SceneSpeed").GetString() + ",");
+                }
             }
             catch
             {

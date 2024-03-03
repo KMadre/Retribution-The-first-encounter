@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Retribution.StageHandler.StageDesignFactorySpace
+namespace Retribution.StageHandlerSpace.StageDesignFactorySpace
 {
     internal class StageDesignFactory
     {

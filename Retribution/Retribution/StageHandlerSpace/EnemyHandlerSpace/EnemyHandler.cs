@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories;
-using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
+using Retribution.StageHandlerSpaceSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories;
+using Retribution.StageHandlerSpaceSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
 
-namespace Retribution.StageHandler.EnemyHandlerSpace
+namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
 {
     public class EnemyHandler
     {
@@ -101,12 +101,6 @@ namespace Retribution.StageHandler.EnemyHandlerSpace
             this.TimePassedGruntB = 0f;
 
             this.WaveRemaining = this.WaveTime;
-        }
-
-        public void LoadTextures()
-        {
-            this.gruntATexture = Globals.Content.Load<Texture2D>("Textures//GruntA");
-            this.gruntBTexture = Globals.Content.Load<Texture2D>("Textures//GruntB");
         }
 
         public void HandlePathing()

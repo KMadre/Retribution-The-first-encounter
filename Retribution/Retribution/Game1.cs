@@ -4,9 +4,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Retribution.Projectiles;
-using Retribution.StageHandler.EnemyHandlerSpace;
-using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories;
-using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
+using Retribution.StageHandlerSpace.EnemyHandlerSpace;
+using Retribution.StageHandlerSpaceSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories;
+using Retribution.StageHandlerSpaceSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
+using Retribution.StageHandlerSpaceSpace;
 
 /// <summary>
 /// Programmers: Kieran Madre
@@ -22,7 +23,7 @@ namespace Retribution
 
         public Player player;
         public ProjectileFactory projectileFactory;
-        public EnemyHandler enemyHandler;
+        public StageHandler stageHandler;
 
         public Game1()
         {
@@ -42,7 +43,7 @@ namespace Retribution
         {
             this.player = new Player();
             this.projectileFactory = new ProjectileFactory();
-            this.enemyHandler = new EnemyHandler(10, false, 200);
+            this.stageHandler = new StageHandler();
 
             Globals.UnPauseGame();
 
@@ -58,7 +59,7 @@ namespace Retribution
 
             player.LoadTexture(); // load player texture
             projectileFactory.LoadTexture();
-            enemyHandler.LoadTextures();
+            stageHandler.LoadTextures();
         }
 
         /// <summary>
@@ -81,8 +82,7 @@ namespace Retribution
             }
             player.InputScript(player, projectileFactory); // player 
             projectileFactory.HandleProjectiles();
-            enemyHandler.HandlePathing();
-            enemyHandler.Update();
+            stageHandler.Update();
 
             base.Update(gameTime);
         }
@@ -103,17 +103,7 @@ namespace Retribution
             {
                 Globals.SpriteBatch.Draw(projectileFactory.Texture, projectile.Position, Color.White);
             }
-            foreach (BaseEnemy enemy in enemyHandler.enemies)
-            {
-                if(enemy is GruntA)
-                {
-                    Globals.SpriteBatch.Draw(enemyHandler.gruntATexture, enemy.Position, Color.White);
-                }
-                if(enemy is GruntB)
-                {
-                    Globals.SpriteBatch.Draw(enemyHandler.gruntBTexture, enemy.Position, Color.White);
-                }
-            }
+            stageHandler.Draw();
 
             Globals.SpriteBatch.End();// stop sprite drawing
             base.Draw(gameTime);
