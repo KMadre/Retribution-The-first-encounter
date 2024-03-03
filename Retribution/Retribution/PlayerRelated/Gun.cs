@@ -42,7 +42,7 @@ namespace Retribution.PlayerRelated
         /// Purpose: spawns in a projectile from the player with gun stats
         /// </summary>
         /// <param name="projectileFactory"></param>
-        public void shoot(ProjectileFactory projectileFactory, Player player, GameTime gameTime)
+        public void shoot(ProjectileFactory projectileFactory, Player player)
         {
             Microsoft.Xna.Framework.Vector2 pos_ = player.Position;
             pos_.X += 12;//center projectile

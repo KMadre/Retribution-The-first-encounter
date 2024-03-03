@@ -19,7 +19,6 @@ namespace Retribution
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
 
         public Player player;
         public ProjectileFactory projectileFactory;
@@ -28,7 +27,10 @@ namespace Retribution
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.PreferredBackBufferHeight = Globals.SCREEN_HEIGHT;
+            _graphics.PreferredBackBufferWidth = Globals.SCREEN_WIDTH;
             Content.RootDirectory = "Content";
+            Globals.Content = Content;
             IsMouseVisible = true; // leave true
         }
 
@@ -42,6 +44,8 @@ namespace Retribution
             this.projectileFactory = new ProjectileFactory();
             this.enemyHandler = new EnemyHandler();
 
+            Globals.UnPauseGame();
+
             base.Initialize();
         }
 
@@ -50,7 +54,7 @@ namespace Retribution
         /// </summary>
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Globals.SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             player.LoadTexture(Content); // load player texture
             projectileFactory.LoadTexture(Content);
@@ -63,18 +67,21 @@ namespace Retribution
         /// <param name="gameTime">This parameter handles the time that happened in game, and makes Frames seperate from game speed</param>
         protected override void Update(GameTime gameTime)
         {
+            Globals.Update(gameTime);
+            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            player.InputScript(player, gameTime, projectileFactory); // player 
-            projectileFactory.HandleProjectiles(gameTime);
-            enemyHandler.HandlePathing(gameTime);
-
-            var userButton = Keyboard.GetState(); // grab what button is currently being pressed down
-            if (userButton.IsKeyDown(Keys.R))
+            if (Keyboard.GetState().IsKeyDown(Keys.P))
             {
-                enemyHandler.enemies.Add(enemyHandler.gruntAFactory.createGrunt());
+                Globals.PauseGame();
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.O))
+            {
+                Globals.UnPauseGame();
+            }
+            player.InputScript(player, projectileFactory); // player 
+            projectileFactory.HandleProjectiles();
+            enemyHandler.HandlePathing();
 
             base.Update(gameTime);
         }
@@ -86,28 +93,28 @@ namespace Retribution
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);//Clear the screen
-            _spriteBatch.Begin();// begin sprite drawing
+            Globals.SpriteBatch.Begin();// begin sprite drawing
 
             // Draw Player
-            _spriteBatch.Draw(player.Texture, player.Position, Color.White);
+            Globals.SpriteBatch.Draw(player.Texture, player.Position, Color.White);
 
             foreach(Projectile projectile in projectileFactory.ProjectileList)
             {
-                _spriteBatch.Draw(projectileFactory.Texture, projectile.Position, Color.White);
+                Globals.SpriteBatch.Draw(projectileFactory.Texture, projectile.Position, Color.White);
             }
             foreach (BaseEnemy enemy in enemyHandler.enemies)
             {
                 if(enemy is GruntA)
                 {
-                    _spriteBatch.Draw(enemyHandler.gruntATexture, enemy.Position, Color.White);
+                    Globals.SpriteBatch.Draw(enemyHandler.gruntATexture, enemy.Position, Color.White);
                 }
                 if(enemy is GruntB)
                 {
-                    _spriteBatch.Draw(enemyHandler.gruntBTexture, enemy.Position, Color.White);
+                    Globals.SpriteBatch.Draw(enemyHandler.gruntBTexture, enemy.Position, Color.White);
                 }
             }
 
-            _spriteBatch.End();// stop sprite drawing
+            Globals.SpriteBatch.End();// stop sprite drawing
             base.Draw(gameTime);
         }
     }

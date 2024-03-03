@@ -55,7 +55,7 @@ namespace Retribution.PlayerRelated
         /// </summary>
         /// <param name="player">player instance</param>
         /// <param name="gameTime">gametime instance. Needed to make character move with time passed instead of framerate</param>
-        public void PlayerInputHandler(Player player, GameTime gameTime, ProjectileFactory projectileFactory)
+        public void PlayerInputHandler(Player player, ProjectileFactory projectileFactory)
         {
             player.ResetSpeed(); // reset the users speed every frame
             var userButton = Keyboard.GetState(); // grab what button is currently being pressed down
@@ -73,32 +73,32 @@ namespace Retribution.PlayerRelated
             if (userButton.IsKeyDown(Keys.A))
             {
                 Vector2 pos = player.Position; // copy the player val
-                pos.X -= player.CurrentSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds; // update based on game time
+                pos.X -= player.CurrentSpeed * (float)Globals.Time; // update based on game time
                 player.Position = pos; // update player position with new value
             }
             if (userButton.IsKeyDown(Keys.D))
             {
                 Vector2 pos = player.Position;
-                pos.X += player.CurrentSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                pos.X += player.CurrentSpeed * (float)Globals.Time;
                 player.Position = pos;
             }
             if (userButton.IsKeyDown(Keys.W))
             {
                 Vector2 pos = player.Position;
-                pos.Y -= player.CurrentSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                pos.Y -= player.CurrentSpeed * (float)Globals.Time;
                 player.Position = pos;
             }
             if (userButton.IsKeyDown(Keys.S))
             {
                 Vector2 pos = player.Position;
-                pos.Y += player.CurrentSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                pos.Y += player.CurrentSpeed * (float)Globals.Time;
                 player.Position = pos;
             }
 
             //Shoot gun
             if (userButton.IsKeyDown(Keys.Space))
             {
-                player.gun.shoot(projectileFactory, player, gameTime);
+                player.gun.shoot(projectileFactory, player);
             }
         }
     }// class end

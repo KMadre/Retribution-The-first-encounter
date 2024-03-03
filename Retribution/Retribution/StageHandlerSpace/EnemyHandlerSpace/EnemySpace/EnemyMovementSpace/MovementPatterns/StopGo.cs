@@ -14,22 +14,22 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMoveme
 {
     public class StopGo : BaseMovement
     {
-        private TimeSpan spanCD;
-        private TimeSpan sinceCD;
+        private float spanCD;
+        private float sinceCD;
         private bool stop;
         public StopGo() : base()
         {
-            spanCD = TimeSpan.FromMilliseconds(500);
+            spanCD = 0.5f;
             stop = false;
-            sinceCD = TimeSpan.Zero;
+            sinceCD = 0.0f;
         }
-        public override void Path(GameTime gameTime, BaseEnemy enemy)
+        public override void Path(BaseEnemy enemy)
         {
-            sinceCD += gameTime.ElapsedGameTime;
+            sinceCD += Globals.Time;
             if (!stop)
             {
                 Vector2 pos = enemy.Position;
-                pos.X += enemy.curr_Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                pos.X += enemy.curr_Speed * (float)Globals.Time;
                 enemy.Position = pos;
             }
             checkCD();
@@ -39,7 +39,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMoveme
             if(sinceCD >= spanCD)
             {
                 stop = !stop;
-                sinceCD = TimeSpan.Zero;
+                sinceCD = 0.0f;
             }
         }
     }

@@ -38,9 +38,9 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
             this.Health = float.Parse(vals[0]);
             this.Speed = float.Parse(vals[1]);
         }
-        public void handlePath(GameTime gameTime, BaseEnemy enemy)
+        public void handlePath(BaseEnemy enemy)
         {
-            this.movement.Path(gameTime, enemy);
+            this.movement.Path(enemy);
         }
     }
 }

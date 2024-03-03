@@ -14,10 +14,10 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMoveme
     public abstract class BaseMovement
     {
         public BaseMovement() { }
-        virtual public void Path(GameTime gameTime, BaseEnemy enemy)
+        virtual public void Path(BaseEnemy enemy)
         {
             Vector2 pos = enemy.Position;
-            pos.X += enemy.curr_Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            pos.X += enemy.curr_Speed * (float)Globals.Time;
             enemy.Position = pos;
         }
     }

@@ -57,11 +57,11 @@ namespace Retribution.Projectiles
         /// Purpose: handle all projectiles pathing
         /// </summary>
         /// <param name="gameTime"></param>
-        public void HandleProjectiles(GameTime gameTime)
+        public void HandleProjectiles()
         {
             foreach(Projectile projectile in this.ProjectileList)
             {
-                projectile.ProjectilePath(gameTime);
+                projectile.ProjectilePath();
             }
         }
 

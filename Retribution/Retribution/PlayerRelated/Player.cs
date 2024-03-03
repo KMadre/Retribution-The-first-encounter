@@ -52,9 +52,9 @@ namespace Retribution.PlayerRelated
         /// </summary>
         /// <param name="player">player instance</param>
         /// <param name="gameTime">gametime instance</param>
-        public void InputScript(Player player, GameTime gameTime, ProjectileFactory projectileFactory)
+        public void InputScript(Player player, ProjectileFactory projectileFactory)
         {
-            input.PlayerInputHandler(player, gameTime, projectileFactory);
+            input.PlayerInputHandler(player, projectileFactory);
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace Retribution.PlayerRelated
         private void CenterPlayer()
         {
 
-            float height = GraphicsDeviceManager.DefaultBackBufferHeight;
-            float width = GraphicsDeviceManager.DefaultBackBufferWidth;
+            float height = 720f;
+            float width = 500f;
 
             Vector2 position = new Vector2(width*0.475f, height*0.9f);
             this.Position = position;

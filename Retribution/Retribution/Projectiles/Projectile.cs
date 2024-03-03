@@ -59,18 +59,18 @@ namespace Retribution.Projectiles
         /// Purpose: handle the pathing updates of the projectiles
         /// </summary>
         /// <param name="gameTime"></param>
-        public void ProjectilePath(GameTime gameTime)
+        public void ProjectilePath()
         {
             if (FiredUp)
             {
                 Vector2 pos = this.Position;
-                pos.Y -= this.projectileSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                pos.Y -= this.projectileSpeed * (float)Globals.Time;
                 this.Position = pos;
             }
             else
             {
                 Vector2 pos = this.Position;
-                pos.Y += this.projectileSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                pos.Y += this.projectileSpeed * (float)Globals.Time;
                 this.Position = pos;
             }
 
@@ -79,12 +79,12 @@ namespace Retribution.Projectiles
                 Vector2 pos = this.Position;
                 if(this.randomnessDirection == 1)
                 {
-                    pos.X += (randomness * this.Spread) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    pos.X += (randomness * this.Spread) * (float)Globals.Time;
                     this.Position = pos;
                 }
                 else
                 {
-                    pos.X -= (randomness * this.Spread) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    pos.X -= (randomness * this.Spread) * (float)Globals.Time;
                     this.Position = pos;
                 }
             }

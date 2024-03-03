@@ -35,15 +35,15 @@ namespace Retribution.StageHandler.EnemyHandlerSpace
 
         public void LoadTextures(ContentManager content)
         {
-            this.gruntATexture = content.Load<Texture2D>("Textures//GruntA");
+            this.gruntATexture = content.Load<Texture2D>("Textures//MidBoss");
             this.gruntBTexture = content.Load<Texture2D>("Textures//GruntB");
         }
 
-        public void HandlePathing(GameTime gameTime)
+        public void HandlePathing()
         {
             foreach(BaseEnemy enemy in enemies)
             {
-                enemy.handlePath(gameTime, enemy);
+                enemy.handlePath(enemy);
             }
         }
     }
