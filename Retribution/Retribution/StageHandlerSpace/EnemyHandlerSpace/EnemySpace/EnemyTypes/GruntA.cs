@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Retribution.ScriptReader;
-using Retribution.StageHandlerSpaceSpace.EnemyHandlerSpace.EnemySpace.EnemyMovementSpace.MovementPatterns;
+using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMovementSpace.MovementPatterns;
 
-namespace Retribution.StageHandlerSpaceSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
+namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
 {
     public class GruntA : BaseEnemy
     {
@@ -18,6 +18,7 @@ namespace Retribution.StageHandlerSpaceSpace.EnemyHandlerSpace.EnemySpace.EnemyT
         public GruntA() : base()
         { 
             LoadScript();
+            this.Position.X = -32;
             this.movement = new StopGo();
         }
    

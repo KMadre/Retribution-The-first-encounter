@@ -1,8 +1,8 @@
 ﻿[
   {
     "Wave1": {
-      "duration": "5",
-      "EnemyAmountTotal": "2",
+      "duration": "2",
+      "EnemyAmountTotal": "90",
       "isBoss": false,
       "BackColor": "LightBlue",
       "ForeColor": "White",
@@ -10,7 +10,7 @@
     },
     "Wave2": {
       "duration": "60",
-      "EnemyAmountTotal": "120",
+      "EnemyAmountTotal": "0",
       "isBoss": true,
       "BackColor": "DarkBlue",
       "ForeColor": "Gray",

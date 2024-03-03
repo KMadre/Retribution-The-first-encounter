@@ -11,18 +11,18 @@ using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
 
 namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories
 {
-    public class GruntAFactory
+    public class MidBossFactory
     {
         private int entityLimit;
-        public GruntAFactory(int entityLimit_)
+        public MidBossFactory(int entityLimit_ = 1)
         {
             this.entityLimit = entityLimit_;
         }
 
-        public GruntA createGrunt()
+        public MidBoss createMidBoss()
         {
-            GruntA gruntA = new GruntA();
-            return gruntA;
+            MidBoss midBoss = new MidBoss();
+            return midBoss;
         }
     }
 }

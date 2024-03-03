@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Retribution.Projectiles;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace;
-using Retribution.StageHandlerSpaceSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories;
-using Retribution.StageHandlerSpaceSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
-using Retribution.StageHandlerSpaceSpace;
+using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories;
+using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
+using Retribution.StageHandlerSpace;
 
 /// <summary>
 /// Programmers: Kieran Madre

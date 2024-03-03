@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Retribution.StageHandlerSpace.StageDesignFactorySpace;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace;
 using Retribution.ScriptReader;
-using Retribution.StageHandlerSpaceSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
+using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Retribution.StageHandlerSpaceSpace
+namespace Retribution.StageHandlerSpace
 {
     public class StageHandler
     {
@@ -23,6 +23,7 @@ namespace Retribution.StageHandlerSpaceSpace
 
         Texture2D GruntATexture;
         Texture2D GruntBTexture;
+        Texture2D MidBossTexture;
 
         public StageHandler() 
         {
@@ -61,6 +62,10 @@ namespace Retribution.StageHandlerSpaceSpace
                 {
                     Globals.SpriteBatch.Draw(GruntBTexture, enemy.Position, Color.White);
                 }
+                if(enemy is MidBoss)
+                {
+                    Globals.SpriteBatch.Draw(MidBossTexture, enemy.Position, Color.White);
+                }
             }
         }
 
@@ -68,6 +73,7 @@ namespace Retribution.StageHandlerSpaceSpace
         {
             this.GruntATexture = Globals.Content.Load<Texture2D>("Textures//GruntA");
             this.GruntBTexture = Globals.Content.Load<Texture2D>("Textures//GruntB");
+            this.MidBossTexture = Globals.Content.Load<Texture2D>("Textures//MidBoss");
         }
 
         public void LoadStageScript()

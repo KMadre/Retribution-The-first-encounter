@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Retribution.StageHandlerSpaceSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories;
-using Retribution.StageHandlerSpaceSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
+using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories;
+using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
 
 namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
 {
@@ -17,16 +17,13 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
         public List<BaseEnemy> enemies;
         public GruntAFactory gruntAFactory;
         public GruntBFactory gruntBFactory;
+        public MidBossFactory midBossFactory;
 
         private bool isBossWave;
         private int baseAmountEnemiesWave;
         private int gruntACount;
         private int gruntBCount;
         private float WaveTime;
-
-        public Texture2D gruntATexture;
-        public Texture2D gruntBTexture;
-
 
         private float intervalGruntA;
         private float intervalGruntB;
@@ -49,8 +46,14 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
 
             this.gruntAFactory = new GruntAFactory(EnemyLimit);
             this.gruntBFactory = new GruntBFactory(EnemyLimit);
+            this.midBossFactory = new MidBossFactory();
 
             this.enemies = new List<BaseEnemy>();
+
+            if (this.isBossWave)
+            {
+                this.enemies.Add(this.midBossFactory.createMidBoss());
+            }
         }
 
         private void DistributeRatio()
@@ -61,7 +64,6 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
                 float RNGRatio = (float)(0.3 + (rand.NextDouble() * 0.4));
 
                 float GruntAPercent = RNGRatio;
-                float GruntBPercent = 1 - GruntAPercent;
 
                 this.gruntACount = (int)(this.baseAmountEnemiesWave * GruntAPercent);
                 this.gruntBCount = this.baseAmountEnemiesWave - gruntACount;
