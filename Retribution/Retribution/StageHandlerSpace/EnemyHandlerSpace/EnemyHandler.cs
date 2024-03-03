@@ -64,7 +64,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
                 float GruntBPercent = 1 - GruntAPercent;
 
                 this.gruntACount = (int)(this.baseAmountEnemiesWave * GruntAPercent);
-                this.gruntBCount = (int)(this.baseAmountEnemiesWave * GruntBPercent);
+                this.gruntBCount = this.baseAmountEnemiesWave - gruntACount;
 
 
             }

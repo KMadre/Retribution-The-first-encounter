@@ -83,7 +83,7 @@ namespace Retribution.StageHandlerSpaceSpace
                 bool isBoss = bool.Parse(vals[(i * 6) + 2]);
                 int enemyCount = int.Parse(vals[(i * 6) + 1]);
 
-                this.Wave_timers.Add(wave_timer);
+                this.Wave_timers.Add(wave_timer+5); // allow for more time that enemies can move off screen
 
                 this.enemyHandlerList.Add(new EnemyHandler(wave_timer, isBoss, enemyCount));
             }

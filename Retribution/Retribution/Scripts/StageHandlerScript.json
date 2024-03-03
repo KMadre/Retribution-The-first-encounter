@@ -2,7 +2,7 @@
   {
     "Wave1": {
       "duration": "5",
-      "EnemyAmountTotal": "1000",
+      "EnemyAmountTotal": "2",
       "isBoss": false,
       "BackColor": "LightBlue",
       "ForeColor": "White",
