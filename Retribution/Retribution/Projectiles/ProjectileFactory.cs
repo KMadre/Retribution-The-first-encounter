@@ -70,9 +70,9 @@ namespace Retribution.Projectiles
         /// Date: 2/1/2024
         /// </summary>
         /// <param name="content"></param>
-        public void LoadTexture(ContentManager content)
+        public void LoadTexture()
         {
-            this.Texture = content.Load<Texture2D>(this.TextureName);
+            this.Texture = Globals.Content.Load<Texture2D>(this.TextureName);
         }
 
         /// <summary>

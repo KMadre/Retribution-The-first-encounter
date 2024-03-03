@@ -18,25 +18,95 @@ namespace Retribution.StageHandler.EnemyHandlerSpace
         public GruntAFactory gruntAFactory;
         public GruntBFactory gruntBFactory;
 
+        private bool isBossWave;
+        private int baseAmountEnemiesWave;
+        private int gruntACount;
+        private int gruntBCount;
+        private float WaveTime;
+
         public Texture2D gruntATexture;
         public Texture2D gruntBTexture;
 
-        public EnemyHandler()
+
+        private float intervalGruntA;
+        private float intervalGruntB;
+
+        private float TimePassedGruntA;
+        private float TimePassedGruntB;
+
+        private float WaveRemaining;
+
+        public EnemyHandler(float waveTime, bool isBoss, int amountEnemies)
         {
-            this.EnemyLimit = 10;
+            this.EnemyLimit = 10; //scriptload later for this
+
+            this.baseAmountEnemiesWave = amountEnemies;
+            this.isBossWave = isBoss;
+            this.WaveTime = waveTime;
+
+            this.DistributeRatio();
+            this.InitializeWaveSpawn();
+
             this.gruntAFactory = new GruntAFactory(EnemyLimit);
             this.gruntBFactory = new GruntBFactory(EnemyLimit);
+
             this.enemies = new List<BaseEnemy>();
-            this.enemies.Add(this.gruntAFactory.createGrunt());
-            enemies[0].Position.Y = 200;
-            this.enemies.Add(this.gruntBFactory.createGrunt());
-            enemies[1].Position.Y = 100;
         }
 
-        public void LoadTextures(ContentManager content)
+        private void DistributeRatio()
         {
-            this.gruntATexture = content.Load<Texture2D>("Textures//MidBoss");
-            this.gruntBTexture = content.Load<Texture2D>("Textures//GruntB");
+            if(this.baseAmountEnemiesWave > 0)
+            {
+                Random rand = new Random();
+                float RNGRatio = (float)(0.3 + (rand.NextDouble() * 0.4));
+
+                float GruntAPercent = RNGRatio;
+                float GruntBPercent = 1 - GruntAPercent;
+
+                this.gruntACount = (int)(this.baseAmountEnemiesWave * GruntAPercent);
+                this.gruntBCount = (int)(this.baseAmountEnemiesWave * GruntBPercent);
+
+
+            }
+        }
+
+        public void Update()
+        {
+            this.WaveRemaining -= Globals.Time;
+            this.TimePassedGruntA -= Globals.Time;
+            this.TimePassedGruntB -= Globals.Time;
+            if(this.WaveRemaining > 0.0f)
+            {
+                if(TimePassedGruntA <= 0.0 && gruntACount > 0)
+                {
+                    this.enemies.Add(this.gruntAFactory.createGrunt());
+                    this.TimePassedGruntA = this.intervalGruntA;
+                    this.gruntACount--;
+                }
+                if(this.TimePassedGruntB <= 0.0 && gruntBCount > 0)
+                {
+                    this.enemies.Add(this.gruntBFactory.createGrunt());
+                    this.TimePassedGruntB = this.intervalGruntB;
+                    this.gruntBCount--;
+                }
+            }
+        }
+
+        private void InitializeWaveSpawn()
+        {
+            this.intervalGruntA = (this.WaveTime / this.gruntACount);
+            this.intervalGruntB = (this.WaveTime / this.gruntBCount);
+
+            this.TimePassedGruntA = 0f;
+            this.TimePassedGruntB = 0f;
+
+            this.WaveRemaining = this.WaveTime;
+        }
+
+        public void LoadTextures()
+        {
+            this.gruntATexture = Globals.Content.Load<Texture2D>("Textures//GruntA");
+            this.gruntBTexture = Globals.Content.Load<Texture2D>("Textures//GruntB");
         }
 
         public void HandlePathing()

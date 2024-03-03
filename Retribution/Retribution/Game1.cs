@@ -42,7 +42,7 @@ namespace Retribution
         {
             this.player = new Player();
             this.projectileFactory = new ProjectileFactory();
-            this.enemyHandler = new EnemyHandler();
+            this.enemyHandler = new EnemyHandler(10, false, 200);
 
             Globals.UnPauseGame();
 
@@ -56,9 +56,9 @@ namespace Retribution
         {
             Globals.SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-            player.LoadTexture(Content); // load player texture
-            projectileFactory.LoadTexture(Content);
-            enemyHandler.LoadTextures(Content);
+            player.LoadTexture(); // load player texture
+            projectileFactory.LoadTexture();
+            enemyHandler.LoadTextures();
         }
 
         /// <summary>
@@ -82,6 +82,7 @@ namespace Retribution
             player.InputScript(player, projectileFactory); // player 
             projectileFactory.HandleProjectiles();
             enemyHandler.HandlePathing();
+            enemyHandler.Update();
 
             base.Update(gameTime);
         }

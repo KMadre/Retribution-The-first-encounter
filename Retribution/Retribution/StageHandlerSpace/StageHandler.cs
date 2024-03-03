@@ -21,7 +21,7 @@ namespace Retribution.StageHandlerSpace
         {
 
             //LoadStageScript();
-            enemyHandler = new EnemyHandler();
+            enemyHandler = new EnemyHandler(50, false, 50);
 
         }
 
