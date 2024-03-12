@@ -17,6 +17,7 @@ namespace Retribution
         public static ContentManager Content { get; set; }
         public static SpriteBatch SpriteBatch { get; set; }
         public static bool isPaused { get; set; }
+        public static bool BulletTime { get; set; } = false;
 
         public static void PauseGame()
         {
@@ -26,16 +27,27 @@ namespace Retribution
         {
             isPaused = false;
         }
+        public static void startBulletTime()
+        {
+            BulletTime = true;
+        }
+        public static void stopBulletTime()
+        {
+            BulletTime = false;
+        }
 
         public static void Update(GameTime gt)
         {
-            if (!isPaused)
+            if (isPaused)
             {
-                Time = (float)gt.ElapsedGameTime.TotalSeconds;
+                Time = 0.0f;
+            }else if (BulletTime)
+            {
+                Time = (float)gt.ElapsedGameTime.TotalSeconds * 0.1f;
             }
             else
             {
-                Time = 0.0f;
+                Time = (float)gt.ElapsedGameTime.TotalSeconds;
             }
         }
     }

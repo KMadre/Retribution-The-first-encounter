@@ -72,7 +72,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
             }
         }
 
-        public void Update()
+        public void WaveUpdate()
         {
             this.WaveRemaining -= Globals.Time;
             this.TimePassedGruntA -= Globals.Time;
@@ -105,7 +105,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
             this.WaveRemaining = this.WaveTime;
         }
 
-        public void HandlePathing()
+        public void EnemyUpdate()
         {
             foreach(BaseEnemy enemy in enemies)
             {

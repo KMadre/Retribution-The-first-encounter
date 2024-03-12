@@ -73,11 +73,11 @@ namespace Retribution
                 Exit();
             if (Keyboard.GetState().IsKeyDown(Keys.P))
             {
-                Globals.PauseGame();
+                Globals.startBulletTime();
             }
             if (Keyboard.GetState().IsKeyDown(Keys.O))
             {
-                Globals.UnPauseGame();
+                Globals.stopBulletTime();
             }
             player.InputScript(player, ProjectileHandler); // player
             stageHandler.Update();

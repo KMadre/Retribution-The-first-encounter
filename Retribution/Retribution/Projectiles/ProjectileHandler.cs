@@ -37,6 +37,9 @@ namespace Retribution.Projectiles
 
         public void Update(EnemyHandler enemyHandler, Player player)
         {
+            List<BaseEnemy> markForDeath = new List<BaseEnemy>();
+            List<BaseProjectile> markHit = new List<BaseProjectile>();
+            bool PlayerHit = false;
             foreach (BaseProjectile projectile in ProjectileList)
             {
                 foreach(BaseEnemy enemy in enemyHandler.enemies)
@@ -46,7 +49,12 @@ namespace Retribution.Projectiles
                         if (projectile.hitbox.Intersects(enemy.hitbox))
                         {
                             enemy.gotHit(projectile);
-                            Globals.PauseGame();
+                            if (!enemy.isAlive())
+                            {
+                                markForDeath.Add(enemy);
+                            }
+                            markHit.Add(projectile);
+                            //Globals.PauseGame();
                         }
                     }
                 }
@@ -55,8 +63,19 @@ namespace Retribution.Projectiles
                     if (projectile.hitbox.Intersects(player.hitbox))
                     {
                         player.kill();
+                        PlayerHit = true;
                     }
                 }
+            }
+
+            for(int i = markForDeath.Count - 1; i >= 0; i--)
+            {
+                //markForDeath[i].kill();
+                enemyHandler.enemies.Remove(markForDeath[i]);
+            }
+            for(int i = markHit.Count - 1; i >= 0; i--)
+            {
+                ProjectileList.Remove(markHit[i]);
             }
         }
 
@@ -67,7 +86,6 @@ namespace Retribution.Projectiles
                 if (projectile is PlayerProjectile)
                 {
                     Globals.SpriteBatch.Draw(PlayerProjectileTexture, projectile.Position, Color.White);
-                    Globals.SpriteBatch.Draw(PlayerProjectileTexture, projectile.hitbox, Color.White);
                 }
             }
         }

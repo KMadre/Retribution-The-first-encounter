@@ -62,5 +62,18 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
         {
             this.Health -= projectile.damage;
         }
+
+
+        public bool isAlive()
+        {
+            if(this.Health > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

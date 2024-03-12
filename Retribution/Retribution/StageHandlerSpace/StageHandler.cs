@@ -40,8 +40,8 @@ namespace Retribution.StageHandlerSpace
             this.Wave_timers[0] -= Globals.Time;
             if(Wave_timers[0] >= 0)
             {
-                enemyHandlerList[0].Update();
-                enemyHandlerList[0].HandlePathing();
+                enemyHandlerList[0].WaveUpdate();
+                enemyHandlerList[0].EnemyUpdate();
             }
             else
             {
