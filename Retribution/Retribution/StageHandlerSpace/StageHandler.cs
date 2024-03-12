@@ -47,6 +47,7 @@ namespace Retribution.StageHandlerSpace
             {
                 this.Wave_timers.RemoveAt(0);
                 this.enemyHandlerList.RemoveAt(0);
+                this.Wave++;
             }
         }
 

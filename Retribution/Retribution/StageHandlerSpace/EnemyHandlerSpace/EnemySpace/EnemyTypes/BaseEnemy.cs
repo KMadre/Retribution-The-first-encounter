@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Retribution.ScriptReader;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMovementSpace.MovementPatterns;
+using Retribution.Projectiles.ProjectileTypes;
 
 namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
 {
@@ -19,14 +20,22 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
         public float Health;
         public float curr_Speed;
         public float Speed;
+        public int Height;
+        public int Width;
+        public int initX;
+        public int initY;
         public BaseMovement movement;
+
+        public Rectangle hitbox;
         public BaseEnemy()
         {
-            Position = Vector2.Zero;
             LoadScript();
+            Position.X = initX;
+            Position.Y = initY;
             this.curr_Health = Health;
             this.curr_Speed = Speed;
             this.movement = new StopGo();
+            this.hitbox = new Rectangle(initX, initY, Width, Height);
         }
 
         private void LoadScript()
@@ -37,10 +46,21 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
 
             this.Health = float.Parse(vals[0]);
             this.Speed = float.Parse(vals[1]);
+            this.Height = int.Parse(vals[2]);
+            this.Width = int.Parse(vals[3]);
+            this.initX = int.Parse(vals[4]);
+            this.initY = int.Parse(vals[5]);
         }
         public void handlePath(BaseEnemy enemy)
         {
             this.movement.Path(enemy);
+            this.hitbox.X = (int)this.Position.X;
+            this.hitbox.Y = (int)this.Position.Y;
+        }
+
+        public void gotHit(BaseProjectile projectile)
+        {
+            this.Health -= projectile.damage;
         }
     }
 }

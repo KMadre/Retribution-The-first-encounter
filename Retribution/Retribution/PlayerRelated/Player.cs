@@ -27,6 +27,9 @@ namespace Retribution.PlayerRelated
         private float Speed; // Max speed that was set
 
         public Vector2 Position { get; set; }
+
+        public Rectangle hitbox;
+
         public string TextureName { get;}
         public Texture2D Texture;
         private PlayerInput input;
@@ -39,6 +42,7 @@ namespace Retribution.PlayerRelated
             this.Lives = 0;
             this.Speed = 0f;
             CenterPlayer();
+            this.hitbox = new Rectangle((int)this.Position.X, (int)this.Position.Y, 32, 32);
             this.TextureName = "Textures//Player";
             this.input = new PlayerInput();
             this.gun = new Gun();
@@ -52,9 +56,9 @@ namespace Retribution.PlayerRelated
         /// </summary>
         /// <param name="player">player instance</param>
         /// <param name="gameTime">gametime instance</param>
-        public void InputScript(Player player, ProjectileFactory projectileFactory)
+        public void InputScript(Player player, ProjectileHandler projectileHandler)
         {
-            input.PlayerInputHandler(player, projectileFactory);
+            input.PlayerInputHandler(player, projectileHandler);
         }
 
         /// <summary>
@@ -65,6 +69,19 @@ namespace Retribution.PlayerRelated
         public void ResetSpeed()
         {
             this.CurrentSpeed = Speed;
+        }
+
+        public void kill()
+        {
+            this.Lives--;
+            if(this.Lives == -1)
+            {
+                Globals.PauseGame();
+            }
+            else
+            {
+                this.CenterPlayer();
+            }
         }
 
         /// <summary>

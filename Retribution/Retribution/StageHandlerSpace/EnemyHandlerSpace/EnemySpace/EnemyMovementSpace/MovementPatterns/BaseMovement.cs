@@ -19,6 +19,8 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMoveme
             Vector2 pos = enemy.Position;
             pos.X += enemy.curr_Speed * (float)Globals.Time;
             enemy.Position = pos;
+            enemy.hitbox.X = (int)pos.X;
+            enemy.hitbox.Y = (int)pos.Y;
         }
     }
 }

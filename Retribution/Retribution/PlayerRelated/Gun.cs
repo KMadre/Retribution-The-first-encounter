@@ -7,6 +7,8 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Retribution.Projectiles.ProjectileFactories;
+using Retribution.Projectiles.ProjectileTypes;
 
 namespace Retribution.PlayerRelated
 {
@@ -31,9 +33,12 @@ namespace Retribution.PlayerRelated
         private float currProjectileSpeed;
         private float ProjectileSpeed;
 
+        private PlayerDefaultProjectileFactory factory;
+
         internal Gun()
         {
             LoadScript();
+            this.factory = new PlayerDefaultProjectileFactory();
         }
 
         /// <summary>
@@ -42,11 +47,13 @@ namespace Retribution.PlayerRelated
         /// Purpose: spawns in a projectile from the player with gun stats
         /// </summary>
         /// <param name="projectileFactory"></param>
-        public void shoot(ProjectileFactory projectileFactory, Player player)
+        public void shoot(ProjectileHandler projectileHandler, Player player)
         {
             Microsoft.Xna.Framework.Vector2 pos_ = player.Position;
             pos_.X += 12;//center projectile
-            projectileFactory.SpawnProjectile(pos_, currProjectileSize, currProjectileSpeed, currDamage, true, spread);
+            PlayerProjectile projectile;
+            projectile = factory.createProjectile(pos_, currProjectileSize, currProjectileSpeed, currDamage, true, spread);
+            projectileHandler.ProjectileList.Add(projectile);
         }
 
         /// <summary>

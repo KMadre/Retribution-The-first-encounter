@@ -1,6 +1,10 @@
 ﻿[
   {
     "Health": "600",
-    "Speed": "50"
+    "Speed": "50",
+    "Height": "64",
+    "Width": "32",
+    "initX": "0",
+    "initY": "0"
   }
 ]

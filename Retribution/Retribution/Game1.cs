@@ -20,9 +20,8 @@ namespace Retribution
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-
         public Player player;
-        public ProjectileFactory projectileFactory;
+        public ProjectileHandler ProjectileHandler;
         public StageHandler stageHandler;
 
         public Game1()
@@ -42,7 +41,7 @@ namespace Retribution
         protected override void Initialize()
         {
             this.player = new Player();
-            this.projectileFactory = new ProjectileFactory();
+            this.ProjectileHandler = new ProjectileHandler();
             this.stageHandler = new StageHandler();
 
             Globals.UnPauseGame();
@@ -58,7 +57,7 @@ namespace Retribution
             Globals.SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             player.LoadTexture(); // load player texture
-            projectileFactory.LoadTexture();
+            ProjectileHandler.LoadTextures();
             stageHandler.LoadTextures();
         }
 
@@ -80,9 +79,10 @@ namespace Retribution
             {
                 Globals.UnPauseGame();
             }
-            player.InputScript(player, projectileFactory); // player 
-            projectileFactory.HandleProjectiles();
+            player.InputScript(player, ProjectileHandler); // player
             stageHandler.Update();
+            ProjectileHandler.Path();
+            ProjectileHandler.Update(stageHandler.enemyHandlerList[0], player);
 
             base.Update(gameTime);
         }
@@ -99,10 +99,7 @@ namespace Retribution
             // Draw Player
             Globals.SpriteBatch.Draw(player.Texture, player.Position, Color.White);
 
-            foreach(Projectile projectile in projectileFactory.ProjectileList)
-            {
-                Globals.SpriteBatch.Draw(projectileFactory.Texture, projectile.Position, Color.White);
-            }
+            ProjectileHandler.Draw();
             stageHandler.Draw();
 
             Globals.SpriteBatch.End();// stop sprite drawing

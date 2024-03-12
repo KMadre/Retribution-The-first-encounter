@@ -17,11 +17,6 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
         public GruntB() : base()
         {
             LoadScript();
-            Vector2 pos = new Vector2();
-            pos.X = Globals.SCREEN_WIDTH;
-            pos.Y = 128;
-
-            this.Position = pos;
             this.movement = new StopGo();
         }
 
@@ -35,6 +30,15 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
             this.curr_Health = float.Parse(vals[0]);
             this.Speed = -1*float.Parse(vals[1]);
             this.curr_Speed = -1*float.Parse(vals[1]);
+            this.Height = int.Parse(vals[2]);
+            this.Width = int.Parse(vals[3]);
+            this.initX = int.Parse(vals[4]);
+            this.initY = int.Parse(vals[5]);
+
+            this.Position.X = this.initX;
+            this.Position.Y = this.initY;
+
+            this.hitbox = new Rectangle(initX, initY, Width, Height);
         }
 
     }
