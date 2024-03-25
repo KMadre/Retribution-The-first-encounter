@@ -10,10 +10,12 @@ using System.Threading.Tasks;
 using Retribution.ScriptReader;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMovementSpace.MovementPatterns;
 using Retribution.Projectiles.ProjectileTypes;
+using Retribution.Projectiles;
+using Retribution.Projectiles.ProjectileFactories;
 
 namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
 {
-    public abstract class BaseEnemy
+    public abstract class BaseEnemy : IEnemy
     {
         public Vector2 Position;
         public float curr_Health;
@@ -24,7 +26,12 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
         public int Width;
         public int initX;
         public int initY;
+
+        private float sinceLast;
+        private float baseCD;
+
         public BaseMovement movement;
+        public BaseProjectileFactory factory;
 
         public Rectangle hitbox;
         public BaseEnemy()
@@ -34,6 +41,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
             Position.Y = initY;
             this.curr_Health = Health;
             this.curr_Speed = Speed;
+            this.sinceLast = 0.0f;
             this.movement = new StopGo();
             this.hitbox = new Rectangle(initX, initY, Width, Height);
         }
@@ -50,6 +58,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
             this.Width = int.Parse(vals[3]);
             this.initX = int.Parse(vals[4]);
             this.initY = int.Parse(vals[5]);
+            this.baseCD = float.Parse(vals[6]);
         }
         public void handlePath(BaseEnemy enemy)
         {
@@ -63,7 +72,6 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
             this.Health -= projectile.damage;
         }
 
-
         public bool isAlive()
         {
             if(this.Health > 0)
@@ -74,6 +82,29 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
             {
                 return false;
             }
+        }
+        public void shoot()
+        {
+            if(factory != null)
+            {
+                sinceLast += Globals.Time;
+                if (checkCD())
+                {
+                    ProjectileHandler projectileHandler = ProjectileHandler.GetProjectileHandler();
+                    projectileHandler.ProjectileList.Add(factory.MakeEnemyProjectile(Position));
+                }
+                
+            }
+        }
+
+        private bool checkCD()
+        {
+            if (sinceLast >= baseCD)
+            {
+                this.sinceLast = 0f;
+                return true;
+            }
+            return false;
         }
     }
 }

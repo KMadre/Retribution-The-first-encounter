@@ -30,6 +30,7 @@ namespace Retribution.ScriptReader
                 sw.Write(curr.GetProperty("Width").GetString() + ",");
                 sw.Write(curr.GetProperty("initX").GetString() + ",");
                 sw.Write(curr.GetProperty("initY").GetString() + ",");
+                sw.Write(curr.GetProperty("BaseCD").GetString() + ",");
             }
             catch
             {

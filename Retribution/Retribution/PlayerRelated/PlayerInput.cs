@@ -55,7 +55,7 @@ namespace Retribution.PlayerRelated
         /// </summary>
         /// <param name="player">player instance</param>
         /// <param name="gameTime">gametime instance. Needed to make character move with time passed instead of framerate</param>
-        public void PlayerInputHandler(Player player, ProjectileHandler projectileHandler)
+        public void PlayerInputHandler(Player player)
         {
             player.ResetSpeed(); // reset the users speed every frame
             var userButton = Keyboard.GetState(); // grab what button is currently being pressed down
@@ -98,8 +98,10 @@ namespace Retribution.PlayerRelated
             //Shoot gun
             if (userButton.IsKeyDown(Keys.Space))
             {
-                player.gun.shoot(projectileHandler, player);
+                player.gun.shoot(player);
             }
+
+            player.updateHitbox();
         }
     }// class end
 }//namespace end

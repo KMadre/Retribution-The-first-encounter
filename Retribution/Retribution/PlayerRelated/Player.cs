@@ -56,9 +56,9 @@ namespace Retribution.PlayerRelated
         /// </summary>
         /// <param name="player">player instance</param>
         /// <param name="gameTime">gametime instance</param>
-        public void InputScript(Player player, ProjectileHandler projectileHandler)
+        public void InputScript(Player player)
         {
-            input.PlayerInputHandler(player, projectileHandler);
+            input.PlayerInputHandler(player);
         }
 
         /// <summary>
@@ -126,6 +126,12 @@ namespace Retribution.PlayerRelated
         public void LoadTexture()
         {
             this.Texture = Globals.Content.Load<Texture2D>(this.TextureName);
+        }
+
+        public void updateHitbox()
+        {
+            this.hitbox.X = (int)this.Position.X;
+            this.hitbox.Y = (int)this.Position.Y;
         }
     }// class end
 }// namespace end

@@ -4,7 +4,8 @@
     "Speed": "10",
     "Height": "64",
     "Width": "128",
-    "initX": "0",
-    "initY": "0"
+    "initX": "250",
+    "initY": "0",
+    "BaseCD": "1"
   }
 ]

@@ -15,16 +15,28 @@ namespace Retribution.Projectiles
 {
     public class ProjectileHandler
     {
+
+        private static ProjectileHandler singleton;
         public List<BaseProjectile> ProjectileList;
         public Texture2D PlayerProjectileTexture;
         public Texture2D SniperProjectileTexture;
         public Texture2D BlastProjectileTexture;
         public Texture2D LazerProjectileTexture;
+        public Texture2D DiscProjectileTexture;
         // need a script loader with the interpeter I already made!!!!!
         public ProjectileHandler()
         {
+            singleton = this;
             ProjectileList = new List<BaseProjectile>();
+        }
 
+        public static ProjectileHandler GetProjectileHandler()
+        {
+            if (singleton == null)
+            {
+                singleton = new ProjectileHandler();
+            }
+            return singleton;
         }
 
         public void Path()
@@ -64,6 +76,7 @@ namespace Retribution.Projectiles
                     {
                         player.kill();
                         PlayerHit = true;
+                        markHit.Add(projectile);
                     }
                 }
             }
@@ -81,18 +94,29 @@ namespace Retribution.Projectiles
 
         public void Draw()
         {
-            foreach (PlayerProjectile projectile in ProjectileList)
+            foreach (BaseProjectile projectile in ProjectileList)
             {
                 if (projectile is PlayerProjectile)
                 {
                     Globals.SpriteBatch.Draw(PlayerProjectileTexture, projectile.Position, Color.White);
                 }
+                if (projectile is DiscProjectile)
+                {
+                    Globals.SpriteBatch.Draw(DiscProjectileTexture, projectile.Position, Color.White);
+                }
+                if (projectile is SniperProjectile)
+                {
+                    Globals.SpriteBatch.Draw(SniperProjectileTexture, projectile.Position, Color.White);
+                }
             }
+
         }
 
         public void LoadTextures()
         {
             this.PlayerProjectileTexture = Globals.Content.Load<Texture2D>("Textures//DefaultProjectile");
+            this.DiscProjectileTexture = Globals.Content.Load<Texture2D>("Textures//DiscProjectile");
+            this.SniperProjectileTexture = Globals.Content.Load<Texture2D>("Textures//SniperProjectile");
         }
     }
 }

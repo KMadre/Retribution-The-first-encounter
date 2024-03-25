@@ -5,6 +5,7 @@
     "Height": "128",
     "Width": "64",
     "initX": "0",
-    "initY": "0"
+    "initY": "0",
+    "BaseCD": "1"
   }
 ]

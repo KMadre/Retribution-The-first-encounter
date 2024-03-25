@@ -25,6 +25,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMoveme
         }
         public override void Path(BaseEnemy enemy)
         {
+            this.checkBounds(enemy);
             sinceCD += Globals.Time;
             if (!stop)
             {

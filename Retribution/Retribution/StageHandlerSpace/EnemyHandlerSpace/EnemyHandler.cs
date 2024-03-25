@@ -110,6 +110,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
             foreach(BaseEnemy enemy in enemies)
             {
                 enemy.handlePath(enemy);
+                enemy.shoot();
             }
         }
     }

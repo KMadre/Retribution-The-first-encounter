@@ -79,7 +79,7 @@ namespace Retribution
             {
                 Globals.stopBulletTime();
             }
-            player.InputScript(player, ProjectileHandler); // player
+            player.InputScript(player); // player
             stageHandler.Update();
             ProjectileHandler.Path();
             ProjectileHandler.Update(stageHandler.enemyHandlerList[0], player);

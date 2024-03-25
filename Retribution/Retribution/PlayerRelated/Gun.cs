@@ -33,12 +33,18 @@ namespace Retribution.PlayerRelated
         private float currProjectileSpeed;
         private float ProjectileSpeed;
 
+        private float sinceLast;
+        private float baseCD;
+
         private PlayerDefaultProjectileFactory factory;
 
         internal Gun()
         {
             LoadScript();
             this.factory = new PlayerDefaultProjectileFactory();
+
+            this.sinceLast = 0f;
+            baseCD = 1/(FireRate / 60);
         }
 
         /// <summary>
@@ -47,13 +53,19 @@ namespace Retribution.PlayerRelated
         /// Purpose: spawns in a projectile from the player with gun stats
         /// </summary>
         /// <param name="projectileFactory"></param>
-        public void shoot(ProjectileHandler projectileHandler, Player player)
+        public void shoot(Player player)
         {
-            Microsoft.Xna.Framework.Vector2 pos_ = player.Position;
-            pos_.X += 12;//center projectile
-            PlayerProjectile projectile;
-            projectile = factory.createProjectile(pos_, currProjectileSize, currProjectileSpeed, currDamage, true, spread);
-            projectileHandler.ProjectileList.Add(projectile);
+            this.sinceLast += Globals.Time;
+            if (checkCD())
+            {
+                Microsoft.Xna.Framework.Vector2 pos_ = player.Position;
+                pos_.X += 12;//center projectile
+                PlayerProjectile projectile;
+                projectile = factory.createProjectile(pos_, currProjectileSize, currProjectileSpeed, currDamage, true, spread);
+                ProjectileHandler projectileHandler = ProjectileHandler.GetProjectileHandler();
+                projectileHandler.ProjectileList.Add(projectile);
+            }
+            
         }
 
         /// <summary>
@@ -80,6 +92,15 @@ namespace Retribution.PlayerRelated
 
             this.ProjectileSize = float.Parse(vals[4]);
             this.currProjectileSpeed = float.Parse(vals[4]);
+        }
+        private bool checkCD()
+        {
+            if (sinceLast >= baseCD)
+            {
+                this.sinceLast = 0f;
+                return true;
+            }
+            return false;
         }
     }
 }
