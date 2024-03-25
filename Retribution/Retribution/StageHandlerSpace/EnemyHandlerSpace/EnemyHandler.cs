@@ -18,8 +18,10 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
         public GruntAFactory gruntAFactory;
         public GruntBFactory gruntBFactory;
         public MidBossFactory midBossFactory;
+        public FinalBossFactory finalBossFactory;
 
-        private bool isBossWave;
+        private bool isMidBossWave;
+        private bool isFinalBossWave;
         private int baseAmountEnemiesWave;
         private int gruntACount;
         private int gruntBCount;
@@ -33,12 +35,13 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
 
         private float WaveRemaining;
 
-        public EnemyHandler(float waveTime, bool isBoss, int amountEnemies)
+        public EnemyHandler(float waveTime, bool isMidBoss, bool isFinalBoss, int amountEnemies)
         {
             this.EnemyLimit = 10; //scriptload later for this
 
             this.baseAmountEnemiesWave = amountEnemies;
-            this.isBossWave = isBoss;
+            this.isMidBossWave = isMidBoss;
+            this.isFinalBossWave = isFinalBoss;
             this.WaveTime = waveTime;
 
             this.DistributeRatio();
@@ -47,12 +50,17 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
             this.gruntAFactory = new GruntAFactory(EnemyLimit);
             this.gruntBFactory = new GruntBFactory(EnemyLimit);
             this.midBossFactory = new MidBossFactory();
+            this.finalBossFactory = new FinalBossFactory();
 
             this.enemies = new List<BaseEnemy>();
 
-            if (this.isBossWave)
+            if (this.isMidBossWave)
             {
                 this.enemies.Add(this.midBossFactory.createMidBoss());
+            }
+            if (this.isFinalBossWave)
+            {
+                this.enemies.Add(this.finalBossFactory.createMidBoss());
             }
         }
 
@@ -67,8 +75,6 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
 
                 this.gruntACount = (int)(this.baseAmountEnemiesWave * GruntAPercent);
                 this.gruntBCount = this.baseAmountEnemiesWave - gruntACount;
-
-
             }
         }
 

@@ -82,6 +82,8 @@ namespace Retribution.PlayerRelated
             {
                 this.CenterPlayer();
             }
+            ProjectileHandler projectileHandler = ProjectileHandler.GetProjectileHandler();
+            projectileHandler.clearProjectiles();
         }
 
         /// <summary>

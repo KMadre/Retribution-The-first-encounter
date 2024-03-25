@@ -1,33 +1,37 @@
 ﻿[
   {
     "Wave1": {
-      "duration": "30",
+      "duration": "1",
       "EnemyAmountTotal": "30",
-      "isBoss": false,
+      "isMidBoss": false,
+      "isFinalBoss": false,
       "BackColor": "LightBlue",
       "ForeColor": "White",
       "SceneSpeed": "Slow"
     },
     "Wave2": {
-      "duration": "60",
+      "duration": "1",
       "EnemyAmountTotal": "0",
-      "isBoss": true,
+      "isMidBoss": true,
+      "isFinalBoss": false,
       "BackColor": "DarkBlue",
       "ForeColor": "Gray",
       "SceneSpeed": "Slow"
     },
     "Wave3": {
-      "duration": "60",
+      "duration": "1",
       "EnemyAmountTotal": "100",
-      "isBoss": false,
+      "isMidBoss": false,
+      "isFinalBoss": false,
       "BackColor": "LightBlue",
       "ForeColor": "White",
       "SceneSpeed": "Slow"
     },
     "Wave4": {
-      "duration": "45",
-      "EnemyAmountTotal": "100",
-      "isBoss": false,
+      "duration": "1",
+      "EnemyAmountTotal": "20",
+      "isMidBoss": false,
+      "isFinalBoss": true,
       "BackColor": "Black",
       "ForeColor": "Green",
       "SceneSpeed": "Fast"

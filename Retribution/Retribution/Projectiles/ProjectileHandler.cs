@@ -74,13 +74,15 @@ namespace Retribution.Projectiles
                 {
                     if (projectile.hitbox.Intersects(player.hitbox))
                     {
-                        player.kill();
                         PlayerHit = true;
                         markHit.Add(projectile);
                     }
                 }
             }
-
+            if (PlayerHit)
+            {
+                player.kill();
+            }
             for(int i = markForDeath.Count - 1; i >= 0; i--)
             {
                 //markForDeath[i].kill();
@@ -112,6 +114,10 @@ namespace Retribution.Projectiles
 
         }
 
+        public void clearProjectiles()
+        {
+            this.ProjectileList.Clear();
+        }
         public void LoadTextures()
         {
             this.PlayerProjectileTexture = Globals.Content.Load<Texture2D>("Textures//DefaultProjectile");

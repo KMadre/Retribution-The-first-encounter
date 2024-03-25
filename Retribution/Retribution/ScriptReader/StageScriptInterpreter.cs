@@ -31,7 +31,8 @@ namespace Retribution.ScriptReader
                     JsonElement wave = waveObj.Value;
                     sw.Write(wave.GetProperty("duration").GetString() + ",");
                     sw.Write(wave.GetProperty("EnemyAmountTotal").GetString() + ",");
-                    sw.Write(wave.GetProperty("isBoss").GetBoolean() + ",");
+                    sw.Write(wave.GetProperty("isMidBoss").GetBoolean() + ",");
+                    sw.Write(wave.GetProperty("isFinalBoss").GetBoolean() + ",");
                     sw.Write(wave.GetProperty("BackColor").GetString() + ",");
                     sw.Write(wave.GetProperty("ForeColor").GetString() + ",");
                     sw.Write(wave.GetProperty("SceneSpeed").GetString() + ",");

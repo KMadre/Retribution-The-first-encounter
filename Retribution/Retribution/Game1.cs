@@ -80,10 +80,13 @@ namespace Retribution
                 Globals.stopBulletTime();
             }
             player.InputScript(player); // player
-            stageHandler.Update();
-            ProjectileHandler.Path();
-            ProjectileHandler.Update(stageHandler.enemyHandlerList[0], player);
-
+            
+            if(stageHandler.enemyHandlerList.Count > 0)
+            {
+                stageHandler.Update();
+                ProjectileHandler.Path();
+                ProjectileHandler.Update(stageHandler.enemyHandlerList[0], player);
+            }
             base.Update(gameTime);
         }
 
@@ -99,8 +102,11 @@ namespace Retribution
             // Draw Player
             Globals.SpriteBatch.Draw(player.Texture, player.Position, Color.White);
 
-            ProjectileHandler.Draw();
-            stageHandler.Draw();
+            if(stageHandler.enemyHandlerList.Count > 0)
+            {
+                ProjectileHandler.Draw();
+                stageHandler.Draw();
+            }
 
             Globals.SpriteBatch.End();// stop sprite drawing
             base.Draw(gameTime);

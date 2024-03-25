@@ -100,8 +100,41 @@ namespace Retribution.PlayerRelated
             {
                 player.gun.shoot(player);
             }
-
+            checkBounds(player);
             player.updateHitbox();
+        }
+
+        private bool checkBounds(Player player)
+        {
+            if(player.Position.X < 0)
+            {
+                Vector2 vector2 = player.Position;
+                vector2.X = 0;
+                player.Position = vector2;
+                return false;
+            }
+            if(player.Position.X + 32 > Globals.SCREEN_WIDTH)
+            {
+                Vector2 vector2 = player.Position;
+                vector2.X = Globals.SCREEN_WIDTH -32;
+                player.Position = vector2;
+                return false;
+            }
+            if(player.Position.Y + 32 > Globals.SCREEN_HEIGHT)
+            {
+                Vector2 vector2 = player.Position;
+                vector2.Y = Globals.SCREEN_HEIGHT-32;
+                player.Position = vector2;
+                return false;
+            }
+            if(player.Position.Y < 0)
+            {
+                Vector2 vector2 = player.Position;
+                vector2.Y = 0;
+                player.Position = vector2;
+                return false;
+            }
+            return true;
         }
     }// class end
 }//namespace end
