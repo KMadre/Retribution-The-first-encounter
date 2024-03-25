@@ -18,7 +18,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
         public GruntB() : base()
         {
             LoadScript();
-            this.movement = new StopGo();
+            this.movement = new UpDown();
             this.factory = new ProjectileFactoryEnemySniper();
         }
 

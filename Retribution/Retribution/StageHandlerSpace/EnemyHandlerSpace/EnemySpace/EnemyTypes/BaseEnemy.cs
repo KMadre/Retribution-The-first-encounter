@@ -91,7 +91,10 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
                 if (checkCD())
                 {
                     ProjectileHandler projectileHandler = ProjectileHandler.GetProjectileHandler();
-                    projectileHandler.ProjectileList.Add(factory.MakeEnemyProjectile(Position));
+                    Vector2 newPos = this.Position;
+                    newPos.X += (int)(0.45 * this.Width);
+                    newPos.Y += this.Height;
+                    projectileHandler.ProjectileList.Add(factory.MakeEnemyProjectile(newPos));
                 }
                 
             }

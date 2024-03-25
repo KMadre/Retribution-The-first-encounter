@@ -110,6 +110,10 @@ namespace Retribution.Projectiles
                 {
                     Globals.SpriteBatch.Draw(SniperProjectileTexture, projectile.Position, Color.White);
                 }
+                if (projectile is BlastProjectile)
+                {
+                    Globals.SpriteBatch.Draw(BlastProjectileTexture, projectile.Position, Color.White);
+                }
             }
 
         }
@@ -123,6 +127,7 @@ namespace Retribution.Projectiles
             this.PlayerProjectileTexture = Globals.Content.Load<Texture2D>("Textures//DefaultProjectile");
             this.DiscProjectileTexture = Globals.Content.Load<Texture2D>("Textures//DiscProjectile");
             this.SniperProjectileTexture = Globals.Content.Load<Texture2D>("Textures//SniperProjectile");
+            this.BlastProjectileTexture = Globals.Content.Load<Texture2D>("Textures//BlastProjectile");
         }
     }
 }

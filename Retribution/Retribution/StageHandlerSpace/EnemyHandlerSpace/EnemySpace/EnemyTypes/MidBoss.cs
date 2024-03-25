@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Retribution.ScriptReader;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMovementSpace.MovementPatterns;
+using Retribution.Projectiles.ProjectileFactories;
 
 namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
 {
@@ -18,6 +19,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
         {
             LoadScript();
             this.movement = new StopGo();
+            this.factory = new ProjectileFactoryEnemyBlast();
         }
 
         private void LoadScript()

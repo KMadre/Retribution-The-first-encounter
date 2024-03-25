@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Retribution.Projectiles.ProjectileFactories;
 
 namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
 {
@@ -14,7 +15,8 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
         public FinalBoss() : base()
         {
             LoadScript();
-            this.movement = new StopGo();
+            this.movement = new Blink();
+            this.factory = new ProjectileFactoryEnemyBlast();
         }
 
         private void LoadScript()

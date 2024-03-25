@@ -81,7 +81,7 @@ namespace Retribution
             }
             player.InputScript(player); // player
             
-            if(stageHandler.enemyHandlerList.Count > 0)
+            if(!Globals.isPaused)
             {
                 stageHandler.Update();
                 ProjectileHandler.Path();
@@ -102,7 +102,7 @@ namespace Retribution
             // Draw Player
             Globals.SpriteBatch.Draw(player.Texture, player.Position, Color.White);
 
-            if(stageHandler.enemyHandlerList.Count > 0)
+            if(!Globals.isPaused)
             {
                 ProjectileHandler.Draw();
                 stageHandler.Draw();
