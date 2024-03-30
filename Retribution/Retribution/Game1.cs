@@ -4,6 +4,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Retribution.Projectiles;
+using Retribution.StageHandlerSpace.EnemyHandlerSpace;
+using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories;
+using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
+using Retribution.StageHandlerSpace;
 
 /// <summary>
 /// Programmers: Kieran Madre
@@ -16,15 +20,17 @@ namespace Retribution
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-
-        private Player player;
-        private ProjectileFactory projectileFactory;
+        public Player player;
+        public ProjectileHandler ProjectileHandler;
+        public StageHandler stageHandler;
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.PreferredBackBufferHeight = Globals.SCREEN_HEIGHT;
+            _graphics.PreferredBackBufferWidth = Globals.SCREEN_WIDTH;
             Content.RootDirectory = "Content";
+            Globals.Content = Content;
             IsMouseVisible = true; // leave true
         }
 
@@ -35,7 +41,10 @@ namespace Retribution
         protected override void Initialize()
         {
             this.player = new Player();
-            this.projectileFactory = new ProjectileFactory();
+            this.ProjectileHandler = new ProjectileHandler();
+            this.stageHandler = new StageHandler();
+
+            Globals.UnPauseGame();
 
             base.Initialize();
         }
@@ -45,10 +54,11 @@ namespace Retribution
         /// </summary>
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Globals.SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-            player.LoadTexture(Content); // load player texture
-            projectileFactory.LoadTexture(Content);
+            player.LoadTexture(); // load player texture
+            ProjectileHandler.LoadTextures();
+            stageHandler.LoadTextures();
         }
 
         /// <summary>
@@ -57,12 +67,26 @@ namespace Retribution
         /// <param name="gameTime">This parameter handles the time that happened in game, and makes Frames seperate from game speed</param>
         protected override void Update(GameTime gameTime)
         {
+            Globals.Update(gameTime);
+            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            player.InputScript(player, gameTime, projectileFactory); // player 
-            projectileFactory.HandleProjectiles(gameTime);
-
+            if (Keyboard.GetState().IsKeyDown(Keys.P))
+            {
+                Globals.startBulletTime();
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.O))
+            {
+                Globals.stopBulletTime();
+            }
+            player.InputScript(player); // player
+            
+            if(!Globals.isPaused)
+            {
+                stageHandler.Update();
+                ProjectileHandler.Path();
+                ProjectileHandler.Update(stageHandler.enemyHandlerList[0], player);
+            }
             base.Update(gameTime);
         }
 
@@ -72,18 +96,19 @@ namespace Retribution
         /// <param name="gameTime">This parameter handles the time that happened in game, and makes Frames seperate from game speed</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);//Clear the screen
-            _spriteBatch.Begin();// begin sprite drawing
+            GraphicsDevice.Clear(Color.White);//Clear the screen
+            Globals.SpriteBatch.Begin();// begin sprite drawing
 
             // Draw Player
-            _spriteBatch.Draw(player.Texture, player.Position, Color.White);
+            Globals.SpriteBatch.Draw(player.Texture, player.Position, Color.White);
 
-            foreach(Projectile projectile in projectileFactory.ProjectileList)
+            if(!Globals.isPaused)
             {
-                _spriteBatch.Draw(projectileFactory.Texture, projectile.Position, Color.White);
+                ProjectileHandler.Draw();
+                stageHandler.Draw();
             }
 
-            _spriteBatch.End();// stop sprite drawing
+            Globals.SpriteBatch.End();// stop sprite drawing
             base.Draw(gameTime);
         }
     }

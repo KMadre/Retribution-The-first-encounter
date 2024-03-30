@@ -27,6 +27,9 @@ namespace Retribution.PlayerRelated
         private float Speed; // Max speed that was set
 
         public Vector2 Position { get; set; }
+
+        public Rectangle hitbox;
+
         public string TextureName { get;}
         public Texture2D Texture;
         private PlayerInput input;
@@ -39,6 +42,7 @@ namespace Retribution.PlayerRelated
             this.Lives = 0;
             this.Speed = 0f;
             CenterPlayer();
+            this.hitbox = new Rectangle((int)this.Position.X, (int)this.Position.Y, 32, 32);
             this.TextureName = "Textures//Player";
             this.input = new PlayerInput();
             this.gun = new Gun();
@@ -52,9 +56,9 @@ namespace Retribution.PlayerRelated
         /// </summary>
         /// <param name="player">player instance</param>
         /// <param name="gameTime">gametime instance</param>
-        public void InputScript(Player player, GameTime gameTime, ProjectileFactory projectileFactory)
+        public void InputScript(Player player)
         {
-            input.PlayerInputHandler(player, gameTime, projectileFactory);
+            input.PlayerInputHandler(player);
         }
 
         /// <summary>
@@ -67,6 +71,21 @@ namespace Retribution.PlayerRelated
             this.CurrentSpeed = Speed;
         }
 
+        public void kill()
+        {
+            this.Lives--;
+            if(this.Lives == -1)
+            {
+                Globals.PauseGame();
+            }
+            else
+            {
+                this.CenterPlayer();
+            }
+            ProjectileHandler projectileHandler = ProjectileHandler.GetProjectileHandler();
+            projectileHandler.clearProjectiles();
+        }
+
         /// <summary>
         /// Programmer: Kieran Madre
         /// Date: 2/1/2024
@@ -75,8 +94,8 @@ namespace Retribution.PlayerRelated
         private void CenterPlayer()
         {
 
-            float height = GraphicsDeviceManager.DefaultBackBufferHeight;
-            float width = GraphicsDeviceManager.DefaultBackBufferWidth;
+            float height = 720f;
+            float width = 500f;
 
             Vector2 position = new Vector2(width*0.475f, height*0.9f);
             this.Position = position;
@@ -106,9 +125,15 @@ namespace Retribution.PlayerRelated
         /// Purpose: Texture loader for player
         /// </summary>
         /// <param name="content"></param>
-        public void LoadTexture(ContentManager content)
+        public void LoadTexture()
         {
-            this.Texture = content.Load<Texture2D>(this.TextureName);
+            this.Texture = Globals.Content.Load<Texture2D>(this.TextureName);
+        }
+
+        public void updateHitbox()
+        {
+            this.hitbox.X = (int)this.Position.X;
+            this.hitbox.Y = (int)this.Position.Y;
         }
     }// class end
 }// namespace end

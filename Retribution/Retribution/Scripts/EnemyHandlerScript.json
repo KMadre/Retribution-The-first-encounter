@@ -1,0 +1,21 @@
+﻿"EnemyHandler": {
+      "Wave1": {
+        "id": "1",
+        "Grunt1": {
+          "Health": "200",
+          "Speed": "50",
+          "ProjectileSpeed": "300",
+          "ProjectileSize": "40",
+          "MovementPattern": "A",
+          "WeaponType": "Sniper"
+        },
+        "Grunt2": {
+          "Health": "200",
+          "Speed": "150",
+          "ProjectileSpeed": "150",
+          "ProjectileSize": "60",
+          "MovementPattern": "B",
+          "WeaponType": "MachineGun"
+        }
+      }
+    }
