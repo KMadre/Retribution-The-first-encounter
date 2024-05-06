@@ -29,7 +29,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMoveme
             if (!stop)
             {
                 Vector2 pos = enemy.Position;
-                pos.X += enemy.curr_Speed * (float)Globals.Time;
+                pos.X += enemy.curr_Speed * enemy.speed_modifier * (float)Globals.Time;
                 enemy.Position = pos;
             }
             checkCD();

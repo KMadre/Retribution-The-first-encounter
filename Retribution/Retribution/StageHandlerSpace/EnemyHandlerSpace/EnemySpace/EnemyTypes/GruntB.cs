@@ -15,11 +15,11 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
 {
     public class GruntB : BaseEnemy
     {
-        public GruntB() : base()
+        public GruntB(string Bullet, Vector2 pos) : base(Bullet)
         {
             LoadScript();
+            this.Position = pos;
             this.movement = new UpDown();
-            this.factory = new ProjectileFactoryEnemySniper();
         }
 
         private void LoadScript()

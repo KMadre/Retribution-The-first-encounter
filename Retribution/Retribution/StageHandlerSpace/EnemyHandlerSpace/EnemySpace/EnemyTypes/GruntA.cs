@@ -17,11 +17,11 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
     public class GruntA : BaseEnemy
     {
 
-        public GruntA() : base()
+        public GruntA(string projectileType, Vector2 pos) : base(projectileType)
         { 
             LoadScript();
+            this.Position = pos;
             this.movement = new StopGo();
-            this.factory = new ProjectileFactoryEnemyDisc();
         }
    
         private void LoadScript()
@@ -38,6 +38,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
             this.Width = int.Parse(vals[3]);
             this.initX = int.Parse(vals[4]);
             this.initY = int.Parse(vals[5]);
+            this.baseCD = float.Parse(vals[6]);
 
             this.Position.X = this.initX;
             this.Position.Y = this.initY;

@@ -49,6 +49,7 @@ namespace Retribution.Projectiles
 
         public void Update(EnemyHandler enemyHandler, Player player)
         {
+            if(enemyHandler == null) { return; }
             List<BaseEnemy> markForDeath = new List<BaseEnemy>();
             List<BaseProjectile> markHit = new List<BaseProjectile>();
             bool PlayerHit = false;
@@ -81,7 +82,10 @@ namespace Retribution.Projectiles
             }
             if (PlayerHit)
             {
-                player.kill();
+                if (!Globals.isGodMode)
+                {
+                    player.kill();
+                }
             }
             for(int i = markForDeath.Count - 1; i >= 0; i--)
             {

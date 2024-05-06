@@ -11,6 +11,7 @@ namespace Retribution
 {
     public static class Globals
     {
+        public static string difficulty = "Normal";
         public const int SCREEN_WIDTH = 500;
         public const int SCREEN_HEIGHT = 700;
         public static float Time { get; set; }
@@ -18,6 +19,18 @@ namespace Retribution
         public static SpriteBatch SpriteBatch { get; set; }
         public static bool isPaused { get; set; }
         public static bool BulletTime { get; set; } = false;
+        
+        public static bool isGodMode { get; set; } = false;
+
+        public static void ActivateGodMode()
+        {
+            isGodMode = true;
+        }
+
+        public static void DeactivateGodMode()
+        {
+            isGodMode = false;
+        }
 
         public static void PauseGame()
         {
@@ -49,6 +62,16 @@ namespace Retribution
             {
                 Time = (float)gt.ElapsedGameTime.TotalSeconds;
             }
+        }
+
+        public static void setDifficulty(string dif)
+        {
+            difficulty = dif;
+        }
+
+        public static string  getDifficulty()
+        {
+            return difficulty;
         }
     }
 }

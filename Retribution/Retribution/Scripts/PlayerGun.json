@@ -1,7 +1,7 @@
 ﻿[
   {
     "Spread": "40",
-    "Damage": "50",
+    "Damage": "100",
     "FireRate": "600",
     "ProjectileSize": "1",
     "ProjectileSpeed": "800"

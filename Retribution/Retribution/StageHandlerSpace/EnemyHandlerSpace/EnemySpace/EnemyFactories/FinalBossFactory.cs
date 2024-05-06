@@ -9,15 +9,15 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
 {
     public class FinalBossFactory
     {
-        private int entityLimit;
-        public FinalBossFactory(int entityLimit_ = 1)
+        private string Bullet;
+        public FinalBossFactory()
         {
-            this.entityLimit = entityLimit_;
+            this.Bullet = "C";
         }
 
         public FinalBoss createMidBoss()
         {
-            FinalBoss finalBoss = new FinalBoss();
+            FinalBoss finalBoss = new FinalBoss(Bullet);
             return finalBoss;
         }
     }

@@ -12,7 +12,7 @@ namespace Retribution.Projectiles.ProjectileTypes
     {
         public SniperProjectile(Vector2 pos, float size, float speed, float dmg, bool FireUp, float spread) : base(pos, size, speed, dmg, FireUp, spread)
         {
-            this.path = new LinearProjectilePath();
+            this.path = new AimedProjectilePath();
         }
     }
 }

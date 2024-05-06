@@ -12,6 +12,7 @@ using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMovementSp
 using Retribution.Projectiles.ProjectileTypes;
 using Retribution.Projectiles;
 using Retribution.Projectiles.ProjectileFactories;
+using Retribution.Upgrades;
 
 namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
 {
@@ -27,14 +28,18 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
         public int initX;
         public int initY;
 
-        private float sinceLast;
-        private float baseCD;
+        public float health_modifier;
+        public float speed_modifier;
+        public float baseCDmultiplier;
+
+        public float sinceLast;
+        public float baseCD;
 
         public BaseMovement movement;
         public BaseProjectileFactory factory;
 
         public Rectangle hitbox;
-        public BaseEnemy()
+        public BaseEnemy(string projectileType)
         {
             LoadScript();
             Position.X = initX;
@@ -44,6 +49,19 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
             this.sinceLast = 0.0f;
             this.movement = new StopGo();
             this.hitbox = new Rectangle(initX, initY, Width, Height);
+            switch (projectileType)
+            {
+                case "A":
+                    this.factory = new ProjectileFactoryEnemySniper();
+                    break;
+                case "B":
+                    this.factory = new ProjectileFactoryEnemyDisc();
+                    break;
+                case "C":
+                    this.factory = new ProjectileFactoryEnemyBlast(); 
+                    break;
+            }
+            difficultySettings();
         }
 
         private void LoadScript()
@@ -80,10 +98,18 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
             }
             else
             {
+                die();
                 return false;
             }
         }
-        public void shoot()
+
+        public virtual void die()
+        {
+            UpgradeHandler upgradeHandler = UpgradeHandler.GetUpgradeHandler();
+            upgradeHandler.GenerateUpgrade(this.Position);
+        }
+
+        public virtual void shoot()
         {
             if(factory != null)
             {
@@ -100,7 +126,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
             }
         }
 
-        private bool checkCD()
+        public bool checkCD()
         {
             if (sinceLast >= baseCD)
             {
@@ -108,6 +134,28 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
                 return true;
             }
             return false;
+        }
+
+        private void difficultySettings()
+        {
+            switch (Globals.getDifficulty())
+            {
+                case "Easy":
+                    health_modifier = 0.5f;
+                    speed_modifier = 0.5f;
+                    baseCDmultiplier = 0.5f;
+                    break;
+                case "Normal":
+                    health_modifier = 1f;
+                    speed_modifier = 1f;
+                    baseCDmultiplier = 1f;
+                    break;
+                case "Hard":
+                    health_modifier = 1.5f;
+                    speed_modifier = 1.5f;
+                    baseCDmultiplier = 1.5f;
+                    break;
+            }
         }
     }
 }
