@@ -2,7 +2,7 @@
   {
     "Difficulty": "Normal",
     "Wave1": {
-      "duration": "45",
+      "duration": "100",
       "GruntACount": "75",
       "GruntABulletType": "B",
       "GruntAInterval": "0.5",
@@ -20,7 +20,7 @@
       "SceneSpeed": "Slow"
     },
     "Wave2": {
-      "duration": "60",
+      "duration": "1",
       "GruntACount": "0",
       "GruntABulletType": "B",
       "GruntAInterval": "4",
@@ -38,7 +38,7 @@
       "SceneSpeed": "Slow"
     },
     "Wave3": {
-      "duration": "60",
+      "duration": "1",
       "GruntACount": "40",
       "GruntABulletType": "B",
       "GruntAInterval": "1.5",

@@ -14,8 +14,6 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
     public class GruntAFactory
     {
         private string Bullet;
-        private bool L;
-        private float YAxis;
 
         private Vector2 pos;
         public GruntAFactory(string Bullet_, bool GruntALR, float GruntAYAxis)
@@ -23,7 +21,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
             this.Bullet = Bullet_;
 
             pos = new Vector2();
-            if (L)
+            if (GruntALR)
             {
                 pos.X = -32;
             }
@@ -31,7 +29,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
             {
                 pos.X = Globals.SCREEN_WIDTH;
             }
-            pos.Y = YAxis;
+            pos.Y = GruntAYAxis;
         }
 
         public GruntA createGrunt()

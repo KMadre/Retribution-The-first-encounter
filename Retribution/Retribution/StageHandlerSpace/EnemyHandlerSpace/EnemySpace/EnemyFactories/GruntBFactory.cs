@@ -14,18 +14,14 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
     public class GruntBFactory
     {
         private string Bullet;
-        private bool L;
-        private float YAxis;
 
         private Vector2 pos;
         public GruntBFactory(string Bullet_, bool GruntBLR, float GruntBYAxis)
         {
             this.Bullet = Bullet_;
-            L = GruntBLR;
-            YAxis = GruntBYAxis;
 
-            Vector2 pos = new Vector2();
-            if (L)
+            pos = new Vector2();
+            if (GruntBLR)
             {
                 pos.X = -32;
             }
@@ -33,7 +29,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
             {
                 pos.X = Globals.SCREEN_WIDTH;
             }
-            pos.Y = YAxis;
+            pos.Y = GruntBYAxis;
         }
 
         public GruntB createGrunt()
