@@ -7,16 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Retribution.Projectiles.ProjectileFactories;
+using Retribution.Projectiles;
 
 namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
 {
     public class FinalBoss : BaseEnemy
     {
-        public FinalBoss() : base()
+
+        private BaseProjectileFactory secondFactory;
+        private BaseProjectileFactory thirdFactory;
+
+        private float sinecLastSecondary;
+        private float sinecLastTrenary;
+
+
+        public FinalBoss(string Bullet) : base(Bullet)
         {
             LoadScript();
             this.movement = new Blink();
-            this.factory = new ProjectileFactoryEnemyBlast();
+            secondFactory = new ProjectileFactoryEnemySniper();
+            thirdFactory = new ProjectileFactoryEnemyDisc();
+            sinecLastSecondary = 0.0f;
         }
 
         private void LoadScript()
@@ -38,6 +49,70 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
             this.Position.Y = this.initY;
 
             this.hitbox = new Rectangle(initX, initY, Width, Height);
+        }
+
+        public override void shoot()
+        {
+            sinceLast += Globals.Time;
+            if (checkCD())
+            {
+                ProjectileHandler projectileHandler = ProjectileHandler.GetProjectileHandler();
+                Vector2 origin = this.Position;
+                origin.X += 64;
+                origin.Y += 32;
+                int numProjectiles = 16;
+                float radius = 50; 
+
+                for (int i = 0; i < numProjectiles; i++)
+                {
+                    float angle = i * (360f / numProjectiles);
+                    float radians = MathHelper.ToRadians(angle);
+
+                    Vector2 circlePos = new Vector2(
+                        origin.X + (float)(radius * Math.Cos(radians)),
+                        origin.Y + (float)(radius * Math.Sin(radians))
+                    );
+                    projectileHandler.ProjectileList.Add(factory.MakeEnemyProjectile(circlePos));
+                }                
+            }
+            if (secondaryCD())
+            {
+                ProjectileHandler projectileHandler = ProjectileHandler.GetProjectileHandler();
+                Vector2 newPos = this.Position;
+                newPos.X += (int)(0.45 * this.Width);
+                newPos.Y += this.Height;
+                projectileHandler.ProjectileList.Add(secondFactory.MakeEnemyProjectile(newPos));
+            }
+            if (trenaryCD())
+            {
+                ProjectileHandler projectileHandler = ProjectileHandler.GetProjectileHandler();
+                Vector2 newPos = this.Position;
+                newPos.X += (int)(0.45 * this.Width);
+                newPos.Y += this.Height;
+                projectileHandler.ProjectileList.Add(thirdFactory.MakeEnemyProjectile(newPos));
+            }
+        }
+
+        private bool secondaryCD()
+        {
+            sinecLastSecondary += Globals.Time;
+            if (sinecLastSecondary >= baseCD/3)
+            {
+                this.sinecLastSecondary = 0f;
+                return true;
+            }
+            return false;
+        }
+
+        private bool trenaryCD()
+        {
+            sinecLastTrenary += Globals.Time;
+            if (sinecLastTrenary >= baseCD/1.5)
+            {
+                this.sinecLastTrenary = 0f;
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -13,15 +13,15 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
 {
     public class GruntAFactory
     {
-        private int entityLimit;
-        public GruntAFactory(int entityLimit_)
+        private string Bullet;
+        public GruntAFactory(string Bullet_)
         {
-            this.entityLimit = entityLimit_;
+            this.Bullet = Bullet_;
         }
 
         public GruntA createGrunt()
         {
-            GruntA gruntA = new GruntA();
+            GruntA gruntA = new GruntA(Bullet);
             return gruntA;
         }
     }

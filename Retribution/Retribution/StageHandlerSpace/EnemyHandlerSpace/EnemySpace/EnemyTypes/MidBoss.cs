@@ -10,16 +10,58 @@ using Microsoft.Xna.Framework.Input;
 using Retribution.ScriptReader;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMovementSpace.MovementPatterns;
 using Retribution.Projectiles.ProjectileFactories;
+using Retribution.Projectiles;
+using Retribution.Upgrades;
 
 namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
 {
     public class MidBoss : BaseEnemy
     {
-        public MidBoss() : base()
+        private BaseProjectileFactory secondFactory;
+        private float sinecLastSecondary;
+        public MidBoss(string Bullet) : base(Bullet)
         {
             LoadScript();
             this.movement = new StopGo();
-            this.factory = new ProjectileFactoryEnemyBlast();
+            secondFactory = new ProjectileFactoryEnemySniper();
+            sinecLastSecondary = 0.0f;
+        }
+
+        public override void shoot()
+        {
+            sinceLast += Globals.Time;
+            if (secondaryCD())
+            {
+                ProjectileHandler projectileHandler = ProjectileHandler.GetProjectileHandler();
+                Vector2 newPos = this.Position;
+                newPos.X += (int)(0.45 * this.Width);
+                newPos.Y += this.Height;
+                projectileHandler.ProjectileList.Add(factory.MakeEnemyProjectile(newPos));
+                projectileHandler.ProjectileList.Add(secondFactory.MakeEnemyProjectile(newPos));
+            }
+            
+        }
+        private bool secondaryCD()
+        {
+            sinecLastSecondary += Globals.Time;
+            if (sinecLastSecondary >= baseCD / 2)
+            {
+                this.sinecLastSecondary = 0f;
+                return true;
+            }
+            return false;
+        }
+
+        public override void die()
+        {
+            UpgradeHandler upgradeHandler = UpgradeHandler.GetUpgradeHandler();
+            for(int i = -11; i < 10; i++)
+            {
+                Vector2 temp = this.Position;
+                temp.X += i * 10;
+                upgradeHandler.GenerateUpgrade(temp);
+            }
+            upgradeHandler.GenerateLife(this.Position);
         }
 
         private void LoadScript()

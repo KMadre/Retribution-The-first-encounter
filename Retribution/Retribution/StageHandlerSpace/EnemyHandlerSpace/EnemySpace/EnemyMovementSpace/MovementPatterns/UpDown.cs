@@ -23,14 +23,14 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMoveme
         {
             sinceCD += Globals.Time;
             Vector2 pos = enemy.Position;
-            pos.X += enemy.curr_Speed/2 * (float)Globals.Time;
+            pos.X += enemy.curr_Speed/2 * enemy.speed_modifier * (float)Globals.Time;
             if (up)
             {
-                pos.Y += enemy.curr_Speed/2 * (float)Globals.Time;
+                pos.Y += enemy.curr_Speed/2 * enemy.speed_modifier * (float)Globals.Time;
             }
             else
             {
-                pos.Y -= enemy.curr_Speed/2 * (float)Globals.Time;
+                pos.Y -= enemy.curr_Speed/2 * enemy.speed_modifier * (float)Globals.Time;
             }
             enemy.Position = pos;
             checkCD();

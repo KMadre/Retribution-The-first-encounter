@@ -18,7 +18,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMoveme
         {
             checkBounds(enemy);
             Vector2 pos = enemy.Position;
-            pos.X += enemy.curr_Speed * (float)Globals.Time;
+            pos.X += enemy.curr_Speed * enemy.speed_modifier* (float)Globals.Time;
             enemy.Position = pos;
             enemy.hitbox.X = (int)pos.X;
             enemy.hitbox.Y = (int)pos.Y;

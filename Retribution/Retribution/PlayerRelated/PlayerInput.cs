@@ -60,6 +60,13 @@ namespace Retribution.PlayerRelated
             player.ResetSpeed(); // reset the users speed every frame
             var userButton = Keyboard.GetState(); // grab what button is currently being pressed down
 
+            if (userButton.IsKeyDown(Keys.G)) {
+                Globals.ActivateGodMode();
+            }
+            if (userButton.IsKeyDown(Keys.H)) {
+                Globals.DeactivateGodMode();
+            }
+
             // Check for Slowdown
             if (userButton.IsKeyDown(Keys.LeftShift))
             {

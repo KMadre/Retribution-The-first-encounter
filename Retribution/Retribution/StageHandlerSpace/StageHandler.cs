@@ -37,6 +37,10 @@ namespace Retribution.StageHandlerSpace
 
         public void Update()
         {
+            if (Wave_timers.Count == 0)
+            {
+                Globals.PauseGame();
+            }
             this.Wave_timers[0] -= Globals.Time;
             if(Wave_timers[0] >= 0)
             {
@@ -91,18 +95,34 @@ namespace Retribution.StageHandlerSpace
             StageScriptInterpreter stageScriptInterpreter = new StageScriptInterpreter("StageHandlerScript.json");
             string valsConcated = stageScriptInterpreter.JsonInterpreter();
             string[] vals = valsConcated.Split(',');
-
-            this.Wave_amount = vals.Count() / 7;
+            string dif = vals[0];
+            Globals.setDifficulty(dif);
+            this.Wave_amount = (vals.Count()-1) / 12;
             for(int i = 0; i < this.Wave_amount; i++)
             {
-                float wave_timer = float.Parse(vals[(i * 7) + 0]);
-                bool isMidBoss = bool.Parse(vals[(i * 7) + 2]);
-                bool isFinalBoss = bool.Parse(vals[(i * 7) + 3]);
-                int enemyCount = int.Parse(vals[(i * 7) + 1]);
+                float wave_timer = float.Parse(vals[(i * 12) + 1]);
+                int enemyACount = int.Parse(vals[(i * 12) + 2]);
+                string GruntABulletType = vals[(i * 12) + 3];
+                float GruntAInterval = float.Parse(vals[(i * 12) + 4]);
+                int enemyBCount = int.Parse(vals[(i * 12) + 5]);
+                string GruntBBulletType = vals[(i * 12) + 6];
+                float GruntBInterval = float.Parse(vals[(i * 12) + 7]);
+                bool isMidBoss = bool.Parse(vals[(i * 12) + 8]);
+                bool isFinalBoss = bool.Parse(vals[(i * 12) + 9]);
 
-                this.Wave_timers.Add(wave_timer+5); // allow for more time that enemies can move off screen
+                this.Wave_timers.Add(wave_timer);
 
-                this.enemyHandlerList.Add(new EnemyHandler(wave_timer, isMidBoss, isFinalBoss, enemyCount));
+                this.enemyHandlerList.Add(new EnemyHandler(
+                    wave_timer, 
+                    isMidBoss, 
+                    isFinalBoss, 
+                    enemyACount, 
+                    enemyBCount, 
+                    GruntABulletType, 
+                    GruntBBulletType,
+                    GruntAInterval,
+                    GruntBInterval
+                    ));
             }
         }
 

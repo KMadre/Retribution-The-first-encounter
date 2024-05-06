@@ -27,7 +27,7 @@ namespace Retribution.Projectiles.ProjectileFactories
 
         private void LoadScript()
         {
-            speed = 500;
+            speed = 750;
         }
 
         public ProjectileFactoryEnemySniper GetProjectileFactoryEnemyDisc()

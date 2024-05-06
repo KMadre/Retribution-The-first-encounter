@@ -1,8 +1,14 @@
 ﻿[
   {
+    "Difficulty": "Normal",
     "Wave1": {
-      "duration": "1",
-      "EnemyAmountTotal": "30",
+      "duration": "45",
+      "GruntACount": "75",
+      "GruntABulletType": "B",
+      "GruntAInterval": "0.5",
+      "GruntBCount": "10",
+      "GruntBBulletType": "A",
+      "GruntBInterval": "0.5",
       "isMidBoss": false,
       "isFinalBoss": false,
       "BackColor": "LightBlue",
@@ -10,17 +16,27 @@
       "SceneSpeed": "Slow"
     },
     "Wave2": {
-      "duration": "1",
-      "EnemyAmountTotal": "0",
+      "duration": "60",
+      "GruntACount": "0",
+      "GruntABulletType": "B",
+      "GruntAInterval": "4",
+      "GruntBCount": "20",
+      "GruntBBulletType": "A",
+      "GruntBInterval": "2",
       "isMidBoss": true,
       "isFinalBoss": false,
-      "BackColor": "DarkBlue",
-      "ForeColor": "Gray",
+      "BackColor": "LightBlue",
+      "ForeColor": "White",
       "SceneSpeed": "Slow"
     },
     "Wave3": {
-      "duration": "1",
-      "EnemyAmountTotal": "100",
+      "duration": "60",
+      "GruntACount": "40",
+      "GruntABulletType": "B",
+      "GruntAInterval": "1.5",
+      "GruntBCount": "60",
+      "GruntBBulletType": "A",
+      "GruntBInterval": "1",
       "isMidBoss": false,
       "isFinalBoss": false,
       "BackColor": "LightBlue",
@@ -28,13 +44,18 @@
       "SceneSpeed": "Slow"
     },
     "Wave4": {
-      "duration": "1",
-      "EnemyAmountTotal": "20",
+      "duration": "60",
+      "GruntACount": "0",
+      "GruntABulletType": "B",
+      "GruntAInterval": "1.5",
+      "GruntBCount": "0",
+      "GruntBBulletType": "A",
+      "GruntBInterval": "1",
       "isMidBoss": false,
       "isFinalBoss": true,
-      "BackColor": "Black",
-      "ForeColor": "Green",
-      "SceneSpeed": "Fast"
+      "BackColor": "LightBlue",
+      "ForeColor": "White",
+      "SceneSpeed": "Slow"
     }
   }
 ] 

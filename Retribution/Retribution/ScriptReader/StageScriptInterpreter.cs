@@ -26,16 +26,25 @@ namespace Retribution.ScriptReader
             StringWriter sw = new StringWriter();
             try
             {
-                foreach(JsonProperty waveObj in curr.EnumerateObject())
+                sw.Write(curr.GetProperty("Difficulty").GetString() + ",");
+                foreach (JsonProperty waveObj in curr.EnumerateObject())
                 {
-                    JsonElement wave = waveObj.Value;
-                    sw.Write(wave.GetProperty("duration").GetString() + ",");
-                    sw.Write(wave.GetProperty("EnemyAmountTotal").GetString() + ",");
-                    sw.Write(wave.GetProperty("isMidBoss").GetBoolean() + ",");
-                    sw.Write(wave.GetProperty("isFinalBoss").GetBoolean() + ",");
-                    sw.Write(wave.GetProperty("BackColor").GetString() + ",");
-                    sw.Write(wave.GetProperty("ForeColor").GetString() + ",");
-                    sw.Write(wave.GetProperty("SceneSpeed").GetString() + ",");
+                    if (waveObj.Name.StartsWith("Wave"))
+                    {
+                        JsonElement wave = waveObj.Value;
+                        sw.Write(wave.GetProperty("duration").GetString() + ",");
+                        sw.Write(wave.GetProperty("GruntACount").GetString() + ",");
+                        sw.Write(wave.GetProperty("GruntABulletType").GetString() + ",");
+                        sw.Write(wave.GetProperty("GruntAInterval").GetString() + ",");
+                        sw.Write(wave.GetProperty("GruntBCount").GetString() + ",");
+                        sw.Write(wave.GetProperty("GruntBBulletType").GetString() + ",");
+                        sw.Write(wave.GetProperty("GruntBInterval").GetString() + ",");
+                        sw.Write(wave.GetProperty("isMidBoss").GetBoolean() + ",");
+                        sw.Write(wave.GetProperty("isFinalBoss").GetBoolean() + ",");
+                        sw.Write(wave.GetProperty("BackColor").GetString() + ",");
+                        sw.Write(wave.GetProperty("ForeColor").GetString() + ",");
+                        sw.Write(wave.GetProperty("SceneSpeed").GetString() + ",");
+                    }
                 }
             }
             catch

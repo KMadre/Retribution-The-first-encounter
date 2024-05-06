@@ -17,7 +17,7 @@ namespace Retribution.PlayerRelated
     /// Date: 2/1/2024
     /// Purpose: the logic to handle the players projectiles
     /// </summary>
-    public class Gun
+    public class Gun : IUpgradeable
     {
         private float spread;
 
@@ -101,6 +101,32 @@ namespace Retribution.PlayerRelated
                 return true;
             }
             return false;
+        }
+
+        private void UpdateFireRate()
+        {
+            baseCD = 1 / (currFireRate / 60);
+        }
+
+        public void IncreaseHealth()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void IncreaseDamage(float increase)
+        {
+            this.currDamage += (int)increase;
+        }
+
+        public void IncreaseFireRate(float increase)
+        {
+            this.currFireRate += increase;
+            UpdateFireRate();
+        }
+
+        public void IncreaseSpeed(float increase)
+        {
+            throw new NotImplementedException();
         }
     }
 }

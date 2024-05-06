@@ -22,7 +22,6 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
 
         private bool isMidBossWave;
         private bool isFinalBossWave;
-        private int baseAmountEnemiesWave;
         private int gruntACount;
         private int gruntBCount;
         private float WaveTime;
@@ -35,20 +34,30 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
 
         private float WaveRemaining;
 
-        public EnemyHandler(float waveTime, bool isMidBoss, bool isFinalBoss, int amountEnemies)
+        public EnemyHandler(float waveTime, 
+            bool isMidBoss,
+            bool isFinalBoss,
+            int enemyACount,
+            int enemyBCount,
+            string GruntABulletType,
+            string GruntBBulletType,
+            float GruntAInterval,
+            float GruntBInterval)
         {
             this.EnemyLimit = 10; //scriptload later for this
 
-            this.baseAmountEnemiesWave = amountEnemies;
+            this.gruntACount = enemyACount;
+            this.gruntBCount = enemyBCount;
+            this.intervalGruntA = GruntAInterval;
+            this.intervalGruntB = GruntBInterval;
             this.isMidBossWave = isMidBoss;
             this.isFinalBossWave = isFinalBoss;
             this.WaveTime = waveTime;
 
-            this.DistributeRatio();
             this.InitializeWaveSpawn();
 
-            this.gruntAFactory = new GruntAFactory(EnemyLimit);
-            this.gruntBFactory = new GruntBFactory(EnemyLimit);
+            this.gruntAFactory = new GruntAFactory(GruntABulletType);
+            this.gruntBFactory = new GruntBFactory(GruntBBulletType);
             this.midBossFactory = new MidBossFactory();
             this.finalBossFactory = new FinalBossFactory();
 
@@ -61,20 +70,6 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
             if (this.isFinalBossWave)
             {
                 this.enemies.Add(this.finalBossFactory.createMidBoss());
-            }
-        }
-
-        private void DistributeRatio()
-        {
-            if(this.baseAmountEnemiesWave > 0)
-            {
-                Random rand = new Random();
-                float RNGRatio = (float)(0.3 + (rand.NextDouble() * 0.4));
-
-                float GruntAPercent = RNGRatio;
-
-                this.gruntACount = (int)(this.baseAmountEnemiesWave * GruntAPercent);
-                this.gruntBCount = this.baseAmountEnemiesWave - gruntACount;
             }
         }
 
@@ -102,9 +97,6 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
 
         private void InitializeWaveSpawn()
         {
-            this.intervalGruntA = (this.WaveTime / this.gruntACount);
-            this.intervalGruntB = (this.WaveTime / this.gruntBCount);
-
             this.TimePassedGruntA = 0f;
             this.TimePassedGruntB = 0f;
 

@@ -8,6 +8,7 @@ using Retribution.StageHandlerSpace.EnemyHandlerSpace;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
 using Retribution.StageHandlerSpace;
+using Retribution.Upgrades;
 
 /// <summary>
 /// Programmers: Kieran Madre
@@ -20,9 +21,13 @@ namespace Retribution
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-        public Player player;
         public ProjectileHandler ProjectileHandler;
         public StageHandler stageHandler;
+        public Player player;
+        public UpgradeHandler upgradeHandler;
+
+        private string LivesText;
+        private SpriteFont font;
 
         public Game1()
         {
@@ -40,10 +45,10 @@ namespace Retribution
         /// </summary>
         protected override void Initialize()
         {
-            this.player = new Player();
             this.ProjectileHandler = new ProjectileHandler();
             this.stageHandler = new StageHandler();
-
+            this.player = new Player();
+            this.upgradeHandler = new UpgradeHandler();
             Globals.UnPauseGame();
 
             base.Initialize();
@@ -59,6 +64,9 @@ namespace Retribution
             player.LoadTexture(); // load player texture
             ProjectileHandler.LoadTextures();
             stageHandler.LoadTextures();
+            upgradeHandler.LoadTexture();
+
+            font = Content.Load<SpriteFont>("Font");
         }
 
         /// <summary>
@@ -67,27 +75,36 @@ namespace Retribution
         /// <param name="gameTime">This parameter handles the time that happened in game, and makes Frames seperate from game speed</param>
         protected override void Update(GameTime gameTime)
         {
-            Globals.Update(gameTime);
-            
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            if (Keyboard.GetState().IsKeyDown(Keys.P))
+            if (!Globals.isPaused)
             {
-                Globals.startBulletTime();
+                Globals.Update(gameTime);
+
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    Exit();
+                if (Keyboard.GetState().IsKeyDown(Keys.P))
+                {
+                    Globals.startBulletTime();
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.O))
+                {
+                    Globals.stopBulletTime();
+                }
+                player.InputScript(player); // player
+
+                try
+                {
+                    stageHandler.Update();
+                    ProjectileHandler.Path();
+                    ProjectileHandler.Update(stageHandler.enemyHandlerList[0], player);
+                    upgradeHandler.Update();
+                }
+                catch
+                {
+                }
+
+                LivesText = "Lives: " + (player.Lives + 1);
+                base.Update(gameTime);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.O))
-            {
-                Globals.stopBulletTime();
-            }
-            player.InputScript(player); // player
-            
-            if(!Globals.isPaused)
-            {
-                stageHandler.Update();
-                ProjectileHandler.Path();
-                ProjectileHandler.Update(stageHandler.enemyHandlerList[0], player);
-            }
-            base.Update(gameTime);
         }
 
         /// <summary>
@@ -106,7 +123,12 @@ namespace Retribution
             {
                 ProjectileHandler.Draw();
                 stageHandler.Draw();
+                upgradeHandler.Draw();
             }
+
+            
+            Vector2 position = new Vector2(10, Globals.SCREEN_HEIGHT - 20);
+            Globals.SpriteBatch.DrawString(font, LivesText, position, Color.Black);
 
             Globals.SpriteBatch.End();// stop sprite drawing
             base.Draw(gameTime);

@@ -19,11 +19,12 @@ using System.Threading.Tasks;
 
 namespace Retribution.PlayerRelated
 {
-    public class Player
+    public class Player : IUpgradeable
     {
+        public static Player instance;
         public int CurrentLives{ get; set; } // Lives updates in live game
         public float CurrentSpeed{ get; set; }  // speed updates in live game
-        private int Lives;  // Max Lives that was set
+        public int Lives;  // Max Lives that was set
         private float Speed; // Max speed that was set
 
         public Vector2 Position { get; set; }
@@ -37,6 +38,7 @@ namespace Retribution.PlayerRelated
 
         public Player()
         {
+            instance = this;
             this.CurrentLives = 0;
             this.CurrentSpeed = 0f;
             this.Lives = 0;
@@ -47,6 +49,16 @@ namespace Retribution.PlayerRelated
             this.input = new PlayerInput();
             this.gun = new Gun();
             LoadPlayerScript();
+            updateLivesFromDifficulty();
+        }
+
+        public static Player GetPlayer()
+        {
+            if (instance == null)
+            {
+                instance = new Player();
+            }
+            return instance;
         }
 
         /// <summary>
@@ -134,6 +146,39 @@ namespace Retribution.PlayerRelated
         {
             this.hitbox.X = (int)this.Position.X;
             this.hitbox.Y = (int)this.Position.Y;
+        }
+
+        private void updateLivesFromDifficulty()
+        {
+            switch (Globals.getDifficulty())
+            {
+                case "Easy": this.Lives = 9;
+                    break;
+                case "Normal": this.Lives = 6;
+                    break;
+                case "Hard": this.Lives = 3;
+                    break;
+            }
+        }
+
+        public void IncreaseHealth()
+        {
+            this.Lives++;
+        }
+
+        public void IncreaseDamage(float increase)
+        {
+            this.gun.IncreaseDamage(increase);
+        }
+
+        public void IncreaseFireRate(float increase)
+        {
+            this.gun.IncreaseFireRate(increase);
+        }
+
+        public void IncreaseSpeed(float increase)
+        {
+            this.Speed += increase;
         }
     }// class end
 }// namespace end

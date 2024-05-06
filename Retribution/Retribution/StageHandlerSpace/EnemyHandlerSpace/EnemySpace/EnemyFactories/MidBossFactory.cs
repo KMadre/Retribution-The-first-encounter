@@ -13,15 +13,15 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
 {
     public class MidBossFactory
     {
-        private int entityLimit;
-        public MidBossFactory(int entityLimit_ = 1)
+        private string Bullet;
+        public MidBossFactory()
         {
-            this.entityLimit = entityLimit_;
+            this.Bullet = "C";
         }
 
         public MidBoss createMidBoss()
         {
-            MidBoss midBoss = new MidBoss();
+            MidBoss midBoss = new MidBoss(Bullet);
             return midBoss;
         }
     }
