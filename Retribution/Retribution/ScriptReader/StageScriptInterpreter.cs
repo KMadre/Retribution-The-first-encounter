@@ -36,9 +36,13 @@ namespace Retribution.ScriptReader
                         sw.Write(wave.GetProperty("GruntACount").GetString() + ",");
                         sw.Write(wave.GetProperty("GruntABulletType").GetString() + ",");
                         sw.Write(wave.GetProperty("GruntAInterval").GetString() + ",");
+                        sw.Write(wave.GetProperty("GruntALeft").GetBoolean() + ",");
+                        sw.Write(wave.GetProperty("GruntAYAxis").GetString() + ",");
                         sw.Write(wave.GetProperty("GruntBCount").GetString() + ",");
                         sw.Write(wave.GetProperty("GruntBBulletType").GetString() + ",");
                         sw.Write(wave.GetProperty("GruntBInterval").GetString() + ",");
+                        sw.Write(wave.GetProperty("GruntBLeft").GetBoolean() + ",");
+                        sw.Write(wave.GetProperty("GruntBYAxis").GetString() + ",");
                         sw.Write(wave.GetProperty("isMidBoss").GetBoolean() + ",");
                         sw.Write(wave.GetProperty("isFinalBoss").GetBoolean() + ",");
                         sw.Write(wave.GetProperty("BackColor").GetString() + ",");

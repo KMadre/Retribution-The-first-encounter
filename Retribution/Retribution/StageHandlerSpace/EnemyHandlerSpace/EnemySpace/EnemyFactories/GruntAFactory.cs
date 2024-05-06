@@ -14,14 +14,29 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
     public class GruntAFactory
     {
         private string Bullet;
-        public GruntAFactory(string Bullet_)
+        private bool L;
+        private float YAxis;
+
+        private Vector2 pos;
+        public GruntAFactory(string Bullet_, bool GruntALR, float GruntAYAxis)
         {
             this.Bullet = Bullet_;
+
+            pos = new Vector2();
+            if (L)
+            {
+                pos.X = -32;
+            }
+            else
+            {
+                pos.X = Globals.SCREEN_WIDTH;
+            }
+            pos.Y = YAxis;
         }
 
         public GruntA createGrunt()
         {
-            GruntA gruntA = new GruntA(Bullet);
+            GruntA gruntA = new GruntA(Bullet, pos);
             return gruntA;
         }
     }

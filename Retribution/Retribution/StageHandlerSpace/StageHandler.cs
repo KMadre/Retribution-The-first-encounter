@@ -97,18 +97,22 @@ namespace Retribution.StageHandlerSpace
             string[] vals = valsConcated.Split(',');
             string dif = vals[0];
             Globals.setDifficulty(dif);
-            this.Wave_amount = (vals.Count()-1) / 12;
+            this.Wave_amount = (vals.Count()-1) / 16;
             for(int i = 0; i < this.Wave_amount; i++)
             {
-                float wave_timer = float.Parse(vals[(i * 12) + 1]);
-                int enemyACount = int.Parse(vals[(i * 12) + 2]);
-                string GruntABulletType = vals[(i * 12) + 3];
-                float GruntAInterval = float.Parse(vals[(i * 12) + 4]);
-                int enemyBCount = int.Parse(vals[(i * 12) + 5]);
-                string GruntBBulletType = vals[(i * 12) + 6];
-                float GruntBInterval = float.Parse(vals[(i * 12) + 7]);
-                bool isMidBoss = bool.Parse(vals[(i * 12) + 8]);
-                bool isFinalBoss = bool.Parse(vals[(i * 12) + 9]);
+                float wave_timer = float.Parse(vals[(i * 16) + 1]);
+                int enemyACount = int.Parse(vals[(i * 16) + 2]);
+                string GruntABulletType = vals[(i * 16) + 3];
+                float GruntAInterval = float.Parse(vals[(i * 16) + 4]);
+                bool GruntALeft = bool.Parse(vals[(i * 16) + 5]);
+                float GruntAYAxis = float.Parse(vals[(i * 16) + 6]);
+                int enemyBCount = int.Parse(vals[(i * 16) + 7]);
+                string GruntBBulletType = vals[(i * 16) + 8];
+                float GruntBInterval = float.Parse(vals[(i * 16) + 9]);
+                bool GruntBLeft = bool.Parse(vals[(i * 16) + 10]);
+                float GruntBYAxis = float.Parse(vals[(i * 16) + 11]);
+                bool isMidBoss = bool.Parse(vals[(i * 16) + 12]);
+                bool isFinalBoss = bool.Parse(vals[(i * 16) + 13]);
 
                 this.Wave_timers.Add(wave_timer);
 
@@ -121,7 +125,11 @@ namespace Retribution.StageHandlerSpace
                     GruntABulletType, 
                     GruntBBulletType,
                     GruntAInterval,
-                    GruntBInterval
+                    GruntBInterval,
+                    GruntALeft,
+                    GruntBLeft,
+                    GruntAYAxis,
+                    GruntBYAxis
                     ));
             }
         }

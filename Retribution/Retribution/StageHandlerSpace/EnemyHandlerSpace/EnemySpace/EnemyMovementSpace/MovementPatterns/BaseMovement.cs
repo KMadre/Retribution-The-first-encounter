@@ -42,7 +42,8 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyMoveme
                 enemy.Position.X = 1;
             }else if(enemy.Position.X > Globals.SCREEN_WIDTH)
             {
-                enemy.Position.X = Globals.SCREEN_WIDTH - 1;
+                enemy.Position.X = Globals.SCREEN_WIDTH - 64;
+                enemy.curr_Speed *= -1;
             }
         }
     }

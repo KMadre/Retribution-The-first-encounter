@@ -42,7 +42,11 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
             string GruntABulletType,
             string GruntBBulletType,
             float GruntAInterval,
-            float GruntBInterval)
+            float GruntBInterval,
+            bool GruntALR,
+            bool GruntBLR,
+            float GruntAYAxis,
+            float GruntBYAxis)
         {
             this.EnemyLimit = 10; //scriptload later for this
 
@@ -56,8 +60,8 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace
 
             this.InitializeWaveSpawn();
 
-            this.gruntAFactory = new GruntAFactory(GruntABulletType);
-            this.gruntBFactory = new GruntBFactory(GruntBBulletType);
+            this.gruntAFactory = new GruntAFactory(GruntABulletType, GruntALR, GruntAYAxis);
+            this.gruntBFactory = new GruntBFactory(GruntBBulletType, GruntBLR, GruntBYAxis);
             this.midBossFactory = new MidBossFactory();
             this.finalBossFactory = new FinalBossFactory();
 

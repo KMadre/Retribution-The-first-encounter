@@ -17,9 +17,10 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
     public class GruntA : BaseEnemy
     {
 
-        public GruntA(string projectileType) : base(projectileType)
+        public GruntA(string projectileType, Vector2 pos) : base(projectileType)
         { 
             LoadScript();
+            this.Position = pos;
             this.movement = new StopGo();
         }
    
