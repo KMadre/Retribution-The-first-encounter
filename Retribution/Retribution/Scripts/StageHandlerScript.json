@@ -1,8 +1,8 @@
 ﻿[
   {
-    "Difficulty": "Hard",
+    "Difficulty": "Normal",
     "Wave1": {
-      "duration": "1",
+      "duration": "45",
       "GruntACount": "75",
       "GruntABulletType": "B",
       "GruntAInterval": "0.5",
@@ -20,7 +20,7 @@
       "SceneSpeed": "Slow"
     },
     "Wave2": {
-      "duration": "1",
+      "duration": "45",
       "GruntACount": "0",
       "GruntABulletType": "B",
       "GruntAInterval": "4",
@@ -38,13 +38,13 @@
       "SceneSpeed": "Slow"
     },
     "Wave3": {
-      "duration": "1",
-      "GruntACount": "40",
+      "duration": "60",
+      "GruntACount": "100",
       "GruntABulletType": "B",
       "GruntAInterval": "1.5",
       "GruntALeft": true,
       "GruntAYAxis": "50",
-      "GruntBCount": "60",
+      "GruntBCount": "80",
       "GruntBBulletType": "A",
       "GruntBInterval": "1",
       "GruntBLeft": false,
