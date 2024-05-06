@@ -27,7 +27,18 @@ namespace Retribution.Projectiles.ProjectileFactories
 
         private void LoadScript()
         {
-            speed = 750;
+            switch (Globals.getDifficulty())
+            {
+                case "Easy":
+                    speed = 575;
+                    break;
+                case "Normal":
+                    speed = 650;
+                    break;
+                case "Hard":
+                    speed = 775;
+                    break;
+            }
         }
 
         public ProjectileFactoryEnemySniper GetProjectileFactoryEnemyDisc()
