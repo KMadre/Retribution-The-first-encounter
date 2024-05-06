@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Retribution.StageHandlerSpace.StageDesignFactorySpace;
+using Retribution.StageHandlerSpace.StageDesignHandlerSpace;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace;
 using Retribution.ScriptReader;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
@@ -52,6 +52,8 @@ namespace Retribution.StageHandlerSpace
                 this.Wave_timers.RemoveAt(0);
                 this.enemyHandlerList.RemoveAt(0);
                 this.Wave++;
+                StageDesignHandler instance = StageDesignHandler.getInstance();
+                instance.randomizeColor();
             }
             if(Wave_timers.Count == 0)
             {
@@ -97,7 +99,7 @@ namespace Retribution.StageHandlerSpace
             string[] vals = valsConcated.Split(',');
             string dif = vals[0];
             Globals.setDifficulty(dif);
-            this.Wave_amount = (vals.Count()-1) / 16;
+            this.Wave_amount = (vals.Count()-2) / 16;
             for(int i = 0; i < this.Wave_amount; i++)
             {
                 float wave_timer = float.Parse(vals[(i * 16) + 1]);

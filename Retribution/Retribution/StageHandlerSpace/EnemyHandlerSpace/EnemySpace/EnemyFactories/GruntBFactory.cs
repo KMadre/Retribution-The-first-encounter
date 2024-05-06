@@ -27,7 +27,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactor
             }
             else
             {
-                pos.X = Globals.SCREEN_WIDTH;
+                pos.X = Globals.SCREEN_WIDTH - 32;
             }
             pos.Y = GruntBYAxis;
         }

@@ -2,7 +2,7 @@
   {
     "Difficulty": "Normal",
     "Wave1": {
-      "duration": "100",
+      "duration": "1",
       "GruntACount": "75",
       "GruntABulletType": "B",
       "GruntAInterval": "0.5",

@@ -10,7 +10,6 @@ using Retribution.Projectiles.ProjectileTypes;
 using Retribution.ScriptReader;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace;
-using Retribution.StageHandlerSpace.StageDesignFactorySpace;
 
 
 namespace Retribution

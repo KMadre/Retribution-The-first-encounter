@@ -107,7 +107,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
         private bool trenaryCD()
         {
             sinecLastTrenary += Globals.Time;
-            if (sinecLastTrenary >= baseCD/1.5)
+            if (sinecLastTrenary >= baseCD * 1.5)
             {
                 this.sinecLastTrenary = 0f;
                 return true;

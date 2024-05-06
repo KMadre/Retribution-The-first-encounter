@@ -44,7 +44,7 @@ namespace Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes
         private bool secondaryCD()
         {
             sinecLastSecondary += Globals.Time;
-            if (sinecLastSecondary >= baseCD / 2)
+            if (sinecLastSecondary >= baseCD * 2)
             {
                 this.sinecLastSecondary = 0f;
                 return true;

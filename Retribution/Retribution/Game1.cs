@@ -9,6 +9,7 @@ using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyFactories;
 using Retribution.StageHandlerSpace.EnemyHandlerSpace.EnemySpace.EnemyTypes;
 using Retribution.StageHandlerSpace;
 using Retribution.Upgrades;
+using Retribution.StageHandlerSpace.StageDesignHandlerSpace;
 
 /// <summary>
 /// Programmers: Kieran Madre
@@ -25,6 +26,7 @@ namespace Retribution
         public StageHandler stageHandler;
         public Player player;
         public UpgradeHandler upgradeHandler;
+        public StageDesignHandler stageDesign;
 
         private string LivesText;
         private SpriteFont font;
@@ -49,6 +51,7 @@ namespace Retribution
             this.stageHandler = new StageHandler();
             this.player = new Player();
             this.upgradeHandler = new UpgradeHandler();
+            this.stageDesign = new StageDesignHandler();
             Globals.UnPauseGame();
 
             base.Initialize();
@@ -65,6 +68,7 @@ namespace Retribution
             ProjectileHandler.LoadTextures();
             stageHandler.LoadTextures();
             upgradeHandler.LoadTexture();
+            stageDesign.LoadTextures();
 
             font = Content.Load<SpriteFont>("Font");
         }
@@ -97,6 +101,7 @@ namespace Retribution
                     ProjectileHandler.Path();
                     ProjectileHandler.Update(stageHandler.enemyHandlerList[0], player);
                     upgradeHandler.Update();
+                    stageDesign.Update();
                 }
                 catch
                 {
@@ -121,6 +126,7 @@ namespace Retribution
 
             if(!Globals.isPaused)
             {
+                stageDesign.Draw();
                 ProjectileHandler.Draw();
                 stageHandler.Draw();
                 upgradeHandler.Draw();
